@@ -9,7 +9,6 @@ export class TreeNode {
 }
 
 export function createBinaryTreeFromArray(nums) {
-  debugger;
   const queue = new Queue();
 
   if (nums.length === 0 || nums[0] === null) {
