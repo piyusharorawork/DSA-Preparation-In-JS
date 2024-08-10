@@ -1,5 +1,5 @@
 import { test, describe, expect } from "vitest";
-import { bSearch } from "./binary-search";
+import { search } from "./binary-search";
 
 describe("binary search", () => {
   const scenerios = [
@@ -15,11 +15,17 @@ describe("binary search", () => {
       target: 55,
       expected: -1,
     },
+    {
+      name: "only one element exists",
+      array: [-100],
+      target: -100,
+      expected: 0,
+    },
   ];
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const actual = bSearch(scenerio.array, scenerio.target);
+      const actual = search(scenerio.array, scenerio.target);
       expect(actual).toBe(scenerio.expected);
     });
   }
