@@ -9,18 +9,18 @@ export class TreeNode {
 }
 
 export function createBinaryTreeFromArray(nums) {
-  const queue = new Queue();
-
-  if (nums.length === 0 || nums[0] === null) {
-    return queue;
+  const N = nums.length;
+  if (N === 0 || nums[0] === null) {
+    return null;
   }
 
+  const queue = new Queue();
   const root = new TreeNode(nums[0]);
   queue.enqueue(root);
 
   let i = 1;
 
-  for (i = 1; i < nums.length; i++) {
+  while (i < N) {
     const node = queue.dequeue();
 
     // Update Left Child
@@ -30,7 +30,6 @@ export function createBinaryTreeFromArray(nums) {
       queue.enqueue(leftNode);
     }
     i++;
-
     // Update Right Child
     if (nums[i] !== null) {
       const rightNode = new TreeNode(nums[i]);
