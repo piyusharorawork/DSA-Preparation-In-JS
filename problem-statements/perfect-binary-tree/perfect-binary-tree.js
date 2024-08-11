@@ -12,7 +12,7 @@ export function isPerfectBinaryTree(root) {
       return 0;
     }
 
-    return 1 + Math.max(count(node.left), count(node.right));
+    return 1 + Math.max(height(node.left), height(node.right));
   };
 
   if (root === null) {
@@ -22,5 +22,6 @@ export function isPerfectBinaryTree(root) {
   const h = height();
   const c = count();
 
-  return (2 ^ h) - 1 === c;
+  const expectedNodes = Math.pow(2, h) - 1;
+  return expectedNodes === c;
 }
