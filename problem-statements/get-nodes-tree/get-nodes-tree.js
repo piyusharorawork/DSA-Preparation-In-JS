@@ -1,4 +1,4 @@
-export function getNodesTree(root) {
+export function getNodesTreeV1(root) {
   let count = 0;
   const helper = (node = root) => {
     count++;
@@ -16,4 +16,13 @@ export function getNodesTree(root) {
 
   helper();
   return count;
+}
+
+// Bottom Up Approach
+export function getNodesTree(root) {
+  if (root === null) {
+    return 0;
+  }
+
+  return 1 + getNodesTree(root.left) + getNodesTree(root.right);
 }
