@@ -31,7 +31,7 @@ export function createBinaryTreeFromArray(nums) {
     }
     i++;
     // Update Right Child
-    if (nums[i] !== null) {
+    if (nums[i] !== null && i < N) {
       const rightNode = new TreeNode(nums[i]);
       node.right = rightNode;
       queue.enqueue(rightNode);
