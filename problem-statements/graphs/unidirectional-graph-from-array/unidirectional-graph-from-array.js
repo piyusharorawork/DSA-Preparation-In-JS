@@ -1,7 +1,7 @@
 export class Node {
-  constructor(val, neighbours) {
+  constructor(val, neighbors) {
     this.val = val === undefined ? 0 : val;
-    this.neighbours = neighbours === undefined ? [] : neighbours;
+    this.neighbors = neighbors === undefined ? [] : neighbors;
   }
 }
 
@@ -18,10 +18,10 @@ export function createUnidirectionalGraph(adjacencyArray) {
     const node = nodes[i];
 
     for (let j = 0; j < adjacencyArray[i].length; j++) {
-      const neighbourVal = adjacencyArray[i][j];
-      const neighbourNode = nodes[neighbourVal - 1];
-      if (!node.neighbours.includes(neighbourNode)) {
-        node.neighbours.push(neighbourNode);
+      const neighborVal = adjacencyArray[i][j];
+      const neighborNode = nodes[neighborVal - 1];
+      if (!node.neighbors.includes(neighborNode)) {
+        node.neighbors.push(neighborNode);
       }
     }
   }
@@ -42,15 +42,15 @@ export function getArrayFromUnidirectionalGraph(node) {
       adjacencyArray.push([]);
     }
 
-    adjacencyArray[currentNode.val - 1] = currentNode.neighbours.map(
-      (neighbour) => {
-        return neighbour.val;
+    adjacencyArray[currentNode.val - 1] = currentNode.neighbors.map(
+      (neighbor) => {
+        return neighbor.val;
       }
     );
 
-    for (const neighbour of currentNode.neighbours) {
-      if (!visited.has(neighbour.val)) {
-        traverse(neighbour);
+    for (const neighbor of currentNode.neighbors) {
+      if (!visited.has(neighbor.val)) {
+        traverse(neighbor);
       }
     }
   };
