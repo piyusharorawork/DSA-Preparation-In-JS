@@ -5,25 +5,26 @@ export class Node {
   }
 }
 
-export function createDirectedGraph(adjacency) {
-  const N = adjacency.length;
+export function createDirectedGraph(adjacencyList) {
+  const N = adjacencyList.length;
 
-  if (N === 0) {
-    return null;
-  }
+  if (N === 0) return null;
 
   const nodes = new Array(N);
 
+  // Since we dont know the order we will fill the nodes list
+  // This will be used in future to get the node from val
   for (let i = 0; i < N; i++) {
     const node = new Node(i + 1);
     nodes[i] = node;
   }
 
+  // Now that we have all the nodes , we will start updatin
+  // their neighbors
   for (let i = 0; i < N; i++) {
     const node = nodes[i];
-
-    for (let j = 0; j < adjacency[i].length; j++) {
-      const neighborVal = adjacency[i][j];
+    for (let j = 0; j < adjacencyList[i].length; j++) {
+      const neighborVal = adjacencyList[i][j];
       const neighborNode = nodes[neighborVal - 1];
       if (!node.neighbors.includes(neighborNode)) {
         node.neighbors.push(neighborNode);
@@ -31,31 +32,29 @@ export function createDirectedGraph(adjacency) {
     }
   }
 
-  const startNode = nodes[0];
-
-  return startNode;
+  const firstNode = nodes[0];
+  return firstNode;
 }
 
 export function getArrayFromDirectedGraph(node) {
-  if (node === null) {
-    return [];
-  }
-  const adjacenctList = [];
+  if (node === null) return [];
+
+  const adjacencyList = [];
   const visited = new Set();
 
   const traverse = (node) => {
-    if (visited.has(node.val)) return;
-    visited.add(node.val);
+    if (visited.has(node)) return;
+    visited.add(node);
 
-    adjacenctList[node.val - 1] = [];
+    adjacencyList[node.val - 1] = [];
 
     for (const neighbor of node.neighbors) {
-      adjacenctList[node.val - 1].push(neighbor.val);
+      adjacencyList[node.val - 1].push(neighbor.val);
       traverse(neighbor);
     }
   };
 
   traverse(node);
 
-  return adjacenctList;
+  return adjacencyList;
 }
