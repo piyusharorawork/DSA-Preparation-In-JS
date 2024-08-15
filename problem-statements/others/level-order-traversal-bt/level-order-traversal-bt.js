@@ -14,9 +14,9 @@ export function levelOrder(root) {
 
     for (let i = 0; i < level; i++) {
       const node = queue.dequeue();
+      levelList.push(node.val);
       if (node.left) queue.enqueue(node.left);
       if (node.right) queue.enqueue(node.right);
-      levelList.push(node.val);
     }
     result.push(levelList);
   }
