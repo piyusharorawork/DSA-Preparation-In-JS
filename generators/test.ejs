@@ -1,0 +1,19 @@
+import { test, describe, expect } from "vitest";
+import { <%= functionName %> } from "./<%= problemName %>";
+
+describe("<%= testName%>", () => {
+  const scenerios = [
+    {
+      name: "",
+      expected: [],
+    },
+    
+  ];
+
+  for (const scenerio of scenerios) {
+    test(scenerio.name, () => {
+      const actual = <%= functionName %>();
+      expect(actual).toStrictEqual(scenerio.expected);
+    });
+  }
+});

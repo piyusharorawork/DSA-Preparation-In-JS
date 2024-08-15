@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "npx vitest run"
+    "test": "npx vitest run",
+    "generate": "node generators/generate-code.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   },
   "homepage": "https://github.com/piyusharorawork/DSA-Preparation-In-JS#readme",
   "devDependencies": {
+    "ejs": "^3.1.10",
     "vitest": "^2.0.5"
   }
 }
