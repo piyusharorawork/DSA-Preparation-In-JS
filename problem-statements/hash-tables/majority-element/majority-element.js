@@ -20,14 +20,18 @@ export function majorityElementV1(nums) {
 }
 
 export function majorityElement(nums) {
-  let count = 0;
-  let candidate;
+  const N = nums.length;
 
-  for (const num of nums) {
+  let count = 1;
+  let candidate = nums[0];
+
+  for (let i = 1; i < N; i++) {
+    const num = nums[i];
     if (count === 0) {
       candidate = num;
     }
     count = num === candidate ? count + 1 : count - 1;
   }
+
   return candidate;
 }
