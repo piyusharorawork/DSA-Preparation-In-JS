@@ -6,7 +6,7 @@ import {
 } from "./binary-tree-traversal-methods";
 import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
 
-describe("balanced binary tree", () => {
+describe("binary tree traversal methods", () => {
   test("pre order traversal", () => {
     const root = createBinaryTreeFromArray([
       1,
