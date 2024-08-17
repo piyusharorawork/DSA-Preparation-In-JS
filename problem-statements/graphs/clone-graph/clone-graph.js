@@ -1,16 +1,16 @@
 import { Node } from "../unidirectional-graph-from-array/unidirectional-graph-from-array";
 
 export function cloneGraph(node) {
-  const nodeMap = {}; // Map of all the values to cloned nodes
+  const clonedNodes = [];
 
   const clone = (node) => {
     if (node === null) return null;
 
     // If the node already exists in the map , it means already processed
-    if (nodeMap[node.val]) return nodeMap[node.val];
+    if (clonedNodes[node.val - 1]) return clonedNodes[node.val - 1];
 
     const clonedNode = new Node(node.val);
-    nodeMap[node.val] = clonedNode;
+    clonedNodes[node.val - 1] = clonedNode;
 
     for (const neighbor of node.neighbors) {
       const clonedNeighbor = clone(neighbor);
