@@ -33,3 +33,18 @@ export function arraysMatch(arr1, arr2) {
   // If all checks passed, the arrays match
   return true;
 }
+
+export function stringArrayMatch(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
+
+  arr1.sort();
+  arr2.sort();
+
+  arr1 = arr1.map((item) => item.split("").sort().join(""));
+  arr2 = arr1.map((item) => item.split("").sort().join(""));
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) return false;
+  }
+  return true;
+}
