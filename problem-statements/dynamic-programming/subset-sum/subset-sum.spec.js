@@ -27,6 +27,12 @@ describe("subset sum", () => {
       target: 16,
       expected: true,
     },
+    {
+      name: "exists",
+      nums: [23, 13, 11, 7, 6, 5, 5],
+      target: 35,
+      expected: true,
+    },
   ];
 
   for (const scenerio of scenerios) {
