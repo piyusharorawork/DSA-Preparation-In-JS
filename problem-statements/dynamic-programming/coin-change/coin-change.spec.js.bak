@@ -1,0 +1,32 @@
+import { test, describe, expect } from "vitest";
+import { coinChange } from "./coin-change";
+
+describe("coin change", () => {
+  const scenerios = [
+    {
+      name: "min 3 coins",
+      coins: [1, 2, 5],
+      amount: 11,
+      expected: 3,
+    },
+    // {
+    //   name: "not possible coins",
+    //   coins: [2],
+    //   amount: 3,
+    //   expected: -1,
+    // },
+    {
+      name: "0 coins",
+      coins: [1],
+      amount: 0,
+      expected: 0,
+    },
+  ];
+
+  for (const scenerio of scenerios) {
+    test(scenerio.name, () => {
+      const actual = coinChange(scenerio.coins, scenerio.amount);
+      expect(actual).toStrictEqual(scenerio.expected);
+    });
+  }
+});
