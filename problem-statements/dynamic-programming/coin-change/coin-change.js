@@ -1,23 +1,190 @@
-export function coinChange(coins, amount) {
-  if (amount === 0) return 0;
-  const coinsCount = coins.length;
+// Only recursive with global var and additional parameter
+export function coinChangeV1(coins, amount) {
+  const N = coins.length;
+  let minCoins = Infinity;
 
-  const table = new Array(coinsCount);
-  for (let i = 0; i < coinsCount; i++) {
-    table[i] = new Array(amount + 1).fill(0);
-  }
+  const helper = (n = N, remaining = amount, coinsUsed = 0) => {
+    if (remaining === 0) {
+      minCoins = Math.min(coinsUsed, minCoins);
+    }
+    if (n === 0) return;
 
-  for (let r = 0; r < table.length; r++) {
-    for (let c = 0; c < table[0].length; c++) {
-      if (r === 0) {
-        table[r][c] = c;
-      } else if (coins[r] > c) {
-        table[r][c] = table[r - 1][c];
-      } else {
-        table[r][c] = 1 + table[c - coins[r]][c];
+    const coinValue = coins[n - 1];
+    if (coinValue <= remaining) {
+      return (
+        helper(n, remaining - coinValue, coinsUsed + 1) ||
+        helper(n - 1, remaining, coinsUsed)
+      );
+    }
+    return helper(n - 1, remaining, coinsUsed);
+  };
+
+  helper();
+  return minCoins === Infinity ? -1 : minCoins;
+}
+
+// Recursive without global vars but with parameter
+export function coinChangeV2(coins, amount) {
+  const N = coins.length;
+
+  const helper = (n = N, remaining = amount, coinsUsed = 0) => {
+    if (remaining === 0) {
+      return coinsUsed;
+    }
+    if (n === 0) return Infinity;
+
+    const coinValue = coins[n - 1];
+    if (coinValue <= remaining) {
+      return Math.min(
+        helper(n, remaining - coinValue, coinsUsed + 1),
+        helper(n - 1, remaining, coinsUsed)
+      );
+    }
+    return helper(n - 1, remaining, coinsUsed);
+  };
+
+  const minCoins = helper();
+  return minCoins === Infinity ? -1 : minCoins;
+}
+
+// Recursive without global var and extra parameter
+export function coinChangeV3(coins, amount) {
+  const N = coins.length;
+
+  const helper = (n = N, remaining = amount) => {
+    if (remaining === 0) {
+      return 0;
+    }
+    if (n === 0) return Infinity;
+
+    const coinValue = coins[n - 1];
+    if (coinValue <= remaining) {
+      return Math.min(
+        1 + helper(n, remaining - coinValue),
+        helper(n - 1, remaining)
+      );
+    }
+    return helper(n - 1, remaining);
+  };
+
+  const minCoins = helper();
+  return minCoins === Infinity ? -1 : minCoins;
+}
+
+// Recursive with common result for future caching
+export function coinChangeV4(coins, amount) {
+  const N = coins.length;
+
+  const helper = (n = N, remaining = amount) => {
+    if (remaining === 0) {
+      return 0;
+    }
+    if (n === 0) return Infinity;
+
+    const coinValue = coins[n - 1];
+    const minCoins =
+      coinValue <= remaining
+        ? Math.min(
+            1 + helper(n, remaining - coinValue),
+            helper(n - 1, remaining)
+          )
+        : helper(n - 1, remaining);
+
+    return minCoins;
+  };
+
+  const minCoins = helper();
+  return minCoins === Infinity ? -1 : minCoins;
+}
+
+// Recursive with memorisation
+export function coinChangeV5(coins, amount) {
+  const N = coins.length;
+
+  const cache = Array.from({ length: N + 1 }, () =>
+    new Array(amount + 1).fill(-1)
+  );
+
+  const helper = (n = N, remaining = amount) => {
+    if (remaining === 0) {
+      return 0;
+    }
+    if (n === 0) return Infinity;
+
+    if (cache[n][remaining] !== -1) return cache[n][remaining];
+
+    const coinValue = coins[n - 1];
+    const minCoins =
+      coinValue <= remaining
+        ? Math.min(
+            1 + helper(n, remaining - coinValue),
+            helper(n - 1, remaining)
+          )
+        : helper(n - 1, remaining);
+
+    cache[n][remaining] = minCoins;
+
+    return minCoins;
+  };
+
+  const minCoins = helper();
+  return minCoins === Infinity ? -1 : minCoins;
+}
+
+// Iterative
+export function coinChangeV6(coins, amount) {
+  const N = coins.length;
+
+  const table = Array.from({ length: N + 1 }, () =>
+    new Array(amount + 1).fill(-1)
+  );
+
+  for (let n = 0; n < table.length; n++) {
+    for (let remaining = 0; remaining < table[0].length; remaining++) {
+      if (remaining === 0) table[n][remaining] = 0;
+      else if (n === 0) table[n][remaining] = Infinity;
+      else {
+        const coinValue = coins[n - 1];
+        table[n][remaining] =
+          coinValue <= remaining
+            ? Math.min(
+                1 + table[n][remaining - coinValue],
+                table[n - 1][remaining]
+              )
+            : table[n - 1][remaining];
       }
     }
   }
 
-  return table[coinsCount - 1][amount];
+  const minCoins = table[N][amount];
+  return minCoins === Infinity ? -1 : minCoins;
+}
+
+export function coinChange(coins, amount) {
+  const N = coins.length;
+
+  const cache = Array.from({ length: N + 1 }, () =>
+    new Array(amount + 1).fill(-1)
+  );
+
+  const helper = (n = N, remaining = amount) => {
+    if (remaining === 0) {
+      return 0;
+    }
+    if (n === 0 || remaining < 0) return Infinity;
+
+    if (cache[n][remaining] !== -1) return cache[n][remaining];
+
+    const value = coins[n - 1];
+    const result =
+      value <= remaining
+        ? Math.min(1 + helper(n, remaining - value), helper(n - 1, remaining))
+        : helper(n - 1, remaining);
+    cache[n][remaining] = result;
+    return result;
+  };
+
+  const minCoins = helper();
+
+  return minCoins === Infinity ? -1 : minCoins;
 }
