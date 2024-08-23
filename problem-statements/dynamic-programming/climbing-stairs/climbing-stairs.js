@@ -10,8 +10,27 @@ export function climbStairsV1(n) {
   return helper(n);
 }
 
-// Iterative approach using DP
+// Recursive With memorisation
 export function climbStairs(n) {
+  const cache = new Array(n + 1).fill(-1);
+
+  const helper = (currentStep = n) => {
+    if (currentStep < 3) return currentStep;
+
+    if (cache[n] !== -1) return cache(n);
+
+    const result = climbStairs(n - 1) + climbStairs(n - 2);
+
+    cache[n] = result;
+
+    return result;
+  };
+
+  return helper(n);
+}
+
+// Iterative approach using DP
+export function climbStairsV3(n) {
   const table = new Array(n);
 
   table[0] = 1;
