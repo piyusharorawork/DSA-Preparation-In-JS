@@ -1,4 +1,4 @@
-import { Queue } from "../../../data-structures/queue";
+import { Queue } from "../../../data-structures/queue/queue";
 
 export function floodFillV1(image, sr, sc, color) {
   const R = image.length;

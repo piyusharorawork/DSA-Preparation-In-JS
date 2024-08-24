@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { getNodesTree } from "./get-nodes-tree";
-import { createBinaryTree } from "../../../data-structures/binary-tree";
+import { createBinaryTree } from "../../../data-structures/binary-tree/binary-tree";
 
 describe("get nodes tree", () => {
   const scenerios = [

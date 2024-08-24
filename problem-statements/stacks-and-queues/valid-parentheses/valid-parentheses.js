@@ -1,4 +1,4 @@
-import { Stack } from "../../../data-structures/stack";
+import { Stack } from "../../../data-structures/stack/stack";
 
 export function isValid(s) {
   const stack = new Stack();

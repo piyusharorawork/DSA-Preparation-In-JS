@@ -1,4 +1,4 @@
-import { Queue } from "../../../data-structures/queue";
+import { Queue } from "../../../data-structures/queue/queue";
 
 export function rightSideView(root) {
   if (root === null) return [];

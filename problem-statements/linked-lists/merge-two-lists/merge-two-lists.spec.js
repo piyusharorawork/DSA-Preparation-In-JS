@@ -1,9 +1,7 @@
 import { describe, expect, test } from "vitest";
-import {
-  createLinkedList,
-  getArrayFromLinkedList,
-} from "../linked-list/linked-list";
 import { mergeTwoLists } from "./merge-two-lists";
+import { createLinkedList } from "../../../data-structures/linked-list/linked-list";
+import { convertLinkedListToArray } from "../../../helpers/linked-list-helper";
 
 describe("merge two lists", () => {
   const scenerios = [
@@ -32,7 +30,7 @@ describe("merge two lists", () => {
       const list1 = createLinkedList(scenerio.list1);
       const list2 = createLinkedList(scenerio.list2);
       const actual = mergeTwoLists(list1, list2);
-      const actualArray = getArrayFromLinkedList(actual);
+      const actualArray = convertLinkedListToArray(actual);
       expect(actualArray).toStrictEqual(scenerio.expected);
     });
   }

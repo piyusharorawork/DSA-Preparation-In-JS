@@ -1,6 +1,6 @@
 import { test, describe, expect } from "vitest";
 import { middleNode } from "./middle-linked-list";
-import { createLinkedList } from "../../../data-structures/linked-list";
+import { createLinkedList } from "../../../data-structures/linked-list/linked-list";
 
 describe("middle linked-list", () => {
   const scenerios = [

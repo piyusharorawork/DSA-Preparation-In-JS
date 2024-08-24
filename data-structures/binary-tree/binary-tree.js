@@ -1,4 +1,4 @@
-import { Queue } from "./queue";
+import { Queue } from "../queue/queue";
 
 export class TreeNode {
   constructor(val, left, right) {

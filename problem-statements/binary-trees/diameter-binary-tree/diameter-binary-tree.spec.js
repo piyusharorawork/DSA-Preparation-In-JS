@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { diameterOfBinaryTree } from "./diameter-binary-tree";
-import { createBinaryTree } from "../../../data-structures/binary-tree";
+import { createBinaryTree } from "../../../data-structures/binary-tree/binary-tree";
 
 describe("diameter binary tree", () => {
   const scenerios = [

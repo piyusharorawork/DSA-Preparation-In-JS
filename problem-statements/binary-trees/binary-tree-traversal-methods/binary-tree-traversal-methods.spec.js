@@ -4,7 +4,7 @@ import {
   preOrderTraversal,
   postOrderTraversal,
 } from "./binary-tree-traversal-methods";
-import { createBinaryTree } from "../../../data-structures/binary-tree";
+import { createBinaryTree } from "../../../data-structures/binary-tree/binary-tree";
 
 describe("binary tree traversal methods", () => {
   test("pre order traversal", () => {

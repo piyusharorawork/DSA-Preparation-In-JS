@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { createLinkedList, getArrayFromLinkedList } from "./linked-list";
+import { createLinkedList } from "./linked-list";
+import { convertLinkedListToArray } from "../../helpers/linked-list-helper";
 
 describe("linked list", () => {
   const scenerios = [
@@ -18,7 +19,7 @@ describe("linked list", () => {
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
       const list = createLinkedList(scenerio.array);
-      const actual = getArrayFromLinkedList(list);
+      const actual = convertLinkedListToArray(list);
       expect(actual).toStrictEqual(scenerio.expected);
     });
   }

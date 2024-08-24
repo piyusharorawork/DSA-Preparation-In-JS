@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { isSymmetric } from "./is-symmetric";
-import { createBinaryTree } from "../../../data-structures/binary-tree";
+import { createBinaryTree } from "../../../data-structures/binary-tree/binary-tree";
 
 describe("is symmetric", () => {
   const scenerios = [

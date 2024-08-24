@@ -1,4 +1,4 @@
-import { Node } from "../../../data-structures/graph";
+import { Node } from "../../../data-structures/graph/graph";
 
 export function canFinishV1(numCourses, prerequisites) {
   const nodes = new Array(numCourses);

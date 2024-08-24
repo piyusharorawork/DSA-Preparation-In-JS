@@ -1,9 +1,7 @@
 import { expect, describe, test } from "vitest";
-import {
-  createLinkedList,
-  getArrayFromLinkedList,
-} from "../linked-list/linked-list";
 import { reverseList } from "./reverse-linked-lists";
+import { createLinkedList } from "../../../data-structures/linked-list/linked-list";
+import { convertLinkedListToArray } from "../../../helpers/linked-list-helper";
 
 describe("reverse link list", () => {
   const scenerios = [
@@ -28,7 +26,7 @@ describe("reverse link list", () => {
     test(scenerio.name, () => {
       const head = createLinkedList(scenerio.array);
       const actual = reverseList(head);
-      const actualArray = getArrayFromLinkedList(actual);
+      const actualArray = convertLinkedListToArray(actual);
       expect(actualArray).toStrictEqual(scenerio.expected);
     });
   }

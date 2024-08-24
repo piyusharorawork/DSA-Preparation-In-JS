@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { levelOrder } from "./level-order-traversal-bt";
-import { createBinaryTree } from "../../../data-structures/binary-tree";
+import { createBinaryTree } from "../../../data-structures/binary-tree/binary-tree";
 
 describe("level order traversal bt", () => {
   const scenerios = [

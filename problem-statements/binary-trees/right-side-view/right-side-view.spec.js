@@ -1,6 +1,6 @@
 import { test, describe, expect } from "vitest";
 import { rightSideView } from "./right-side-view";
-import { createBinaryTree } from "../../../data-structures/binary-tree";
+import { createBinaryTree } from "../../../data-structures/binary-tree/binary-tree";
 
 describe("right side-view", () => {
   const scenerios = [

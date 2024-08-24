@@ -1,21 +1,21 @@
-// export function lowestCommonAncestor(root, p, q) {
-//   if (p === null || q === null || root === null) {
-//     return null;
-//   }
+export function lowestCommonAncestorV1(root, p, q) {
+  if (p === null || q === null || root === null) {
+    return null;
+  }
 
-//   const maxNode = Math.max(p.val, q.val);
-//   const minNode = Math.min(p.val, q.val);
+  const maxNode = Math.max(p.val, q.val);
+  const minNode = Math.min(p.val, q.val);
 
-//   if (root.val > maxNode) {
-//     return lowestCommonAncestor(root.left, p, q);
-//   }
+  if (root.val > maxNode) {
+    return lowestCommonAncestor(root.left, p, q);
+  }
 
-//   if (root.val < minNode) {
-//     return lowestCommonAncestor(root.right, p, q);
-//   }
+  if (root.val < minNode) {
+    return lowestCommonAncestor(root.right, p, q);
+  }
 
-//   return root;
-// }
+  return root;
+}
 
 export function lowestCommonAncestor(root, p, q) {
   const maxNode = Math.max(p.val, q.val);

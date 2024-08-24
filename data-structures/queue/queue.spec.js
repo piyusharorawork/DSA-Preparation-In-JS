@@ -1,7 +1,7 @@
 import { Queue } from "./queue";
 import { expect, test } from "vitest";
 
-test("some common operations of queue", () => {
+test("Implement queue", () => {
   const queue = new Queue();
   queue.enqueue(100);
   queue.enqueue(200);

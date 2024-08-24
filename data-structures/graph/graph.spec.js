@@ -1,10 +1,8 @@
 import { expect, test, describe } from "vitest";
-import {
-  createUnidirectionalGraph,
-  getArrayFromUnidirectionalGraph,
-} from "./unidirectional-graph-from-array";
+import { createGraph } from "./graph";
+import { convertGraphToArray } from "../../helpers/graph-helpers";
 
-describe("unidirectoinal graph", () => {
+describe("implement graph from array", () => {
   const scenerios = [
     {
       name: "with 4 nodes",
@@ -31,8 +29,8 @@ describe("unidirectoinal graph", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const graph = createUnidirectionalGraph(scenerio.array);
-      const array = getArrayFromUnidirectionalGraph(graph);
+      const graph = createGraph(scenerio.array);
+      const array = convertGraphToArray(graph);
       expect(array).toStrictEqual(scenerio.expected);
     });
   }

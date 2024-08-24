@@ -1,4 +1,4 @@
-import { Node } from "../unidirectional-graph-from-array/unidirectional-graph-from-array";
+import { Node } from "../../../data-structures/graph/graph";
 
 export function cloneGraph(node) {
   const clonedNodes = [];

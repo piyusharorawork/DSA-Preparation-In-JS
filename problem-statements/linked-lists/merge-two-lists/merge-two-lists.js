@@ -1,4 +1,4 @@
-import { ListNode } from "../linked-list/linked-list";
+import { ListNode } from "../../../data-structures/linked-list/linked-list";
 
 export function mergeTwoListsV1(list1, list2) {
   if (list1 === null && list2 === null) {

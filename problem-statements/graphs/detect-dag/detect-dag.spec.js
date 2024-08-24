@@ -1,6 +1,6 @@
 import { test, describe, expect } from "vitest";
 import { detectDag } from "./detect-dag";
-import { createGraph } from "../../../data-structures/graph";
+import { createGraph } from "../../../data-structures/graph/graph";
 
 describe("detect dag", () => {
   const scenerios = [

@@ -1,9 +1,7 @@
 import { expect, test, describe } from "vitest";
-import {
-  createUnidirectionalGraph,
-  getArrayFromUnidirectionalGraph,
-} from "../unidirectional-graph-from-array/unidirectional-graph-from-array";
 import { cloneGraph } from "./clone-graph";
+import { createGraph } from "../../../data-structures/graph/graph";
+import { convertGraphToArray } from "../../../helpers/graph-helpers";
 
 describe("clone graph", () => {
   const scenerios = [
@@ -32,9 +30,9 @@ describe("clone graph", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const graph = createUnidirectionalGraph(scenerio.array);
+      const graph = createGraph(scenerio.array);
       const clonedGraph = cloneGraph(graph);
-      const clonedGraphArray = getArrayFromUnidirectionalGraph(clonedGraph);
+      const clonedGraphArray = convertGraphToArray(clonedGraph);
       expect(clonedGraphArray).toStrictEqual(scenerio.expected);
     });
   }

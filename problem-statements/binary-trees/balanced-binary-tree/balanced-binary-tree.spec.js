@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { isBalanced } from "./balanced-binary-tree";
-import { createBinaryTree } from "../../../data-structures/binary-tree";
+import { createBinaryTree } from "../../../data-structures/binary-tree/binary-tree";
 
 describe("balanced binary tree", () => {
   const scenerios = [

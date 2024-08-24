@@ -1,4 +1,5 @@
-import { TreeNode } from "../../../data-structures/binary-tree";
+import { TreeNode } from "../../../data-structures/binary-tree/binary-tree";
+
 export function buildTree(preorder, inorder) {
   const N = preorder.length;
   if (N === 1) return new TreeNode(preorder[0]);

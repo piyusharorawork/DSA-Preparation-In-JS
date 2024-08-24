@@ -3,7 +3,7 @@ import { lowestCommonAncestor } from "./lca-bst";
 import {
   createBinaryTree,
   TreeNode,
-} from "../../../data-structures/binary-tree";
+} from "../../../data-structures/binary-tree/binary-tree";
 
 describe("lca bst", () => {
   const scenerios = [

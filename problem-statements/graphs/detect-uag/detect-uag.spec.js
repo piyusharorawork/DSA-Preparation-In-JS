@@ -1,6 +1,6 @@
 import { test, describe, expect } from "vitest";
 import { detectAcyclic } from "./detect-uag";
-import { createGraph } from "../../../data-structures/graph";
+import { createGraph } from "../../../data-structures/graph/graph";
 
 describe("detect uag", () => {
   const scenerios = [
