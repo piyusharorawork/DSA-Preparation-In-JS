@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npx vitest run",
+    "test:watch": "npx vitest",
     "generate": "node generators/generate-code.js"
   },
   "repository": {

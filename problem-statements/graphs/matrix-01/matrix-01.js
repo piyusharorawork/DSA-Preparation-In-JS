@@ -1,4 +1,4 @@
-import { Queue } from "../../others/implement-queue/queue";
+import { Queue } from "../../../data-structures/queue";
 
 export function updateMatrix(mat) {
   const R = mat.length;

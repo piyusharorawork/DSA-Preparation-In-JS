@@ -1,9 +1,9 @@
 import { expect, describe, test } from "vitest";
 import { lowestCommonAncestor } from "./lca-bst";
 import {
-  createBinaryTreeFromArray,
+  createBinaryTree,
   TreeNode,
-} from "../create-binary-tree-from-array/create-binary-tree-from-array";
+} from "../../../data-structures/binary-tree";
 
 describe("lca bst", () => {
   const scenerios = [
@@ -25,7 +25,7 @@ describe("lca bst", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const root = createBinaryTreeFromArray(scenerio.values);
+      const root = createBinaryTree(scenerio.values);
       const pNode = new TreeNode(scenerio.p);
       const qNode = new TreeNode(scenerio.q);
       const actual = lowestCommonAncestor(root, pNode, qNode);

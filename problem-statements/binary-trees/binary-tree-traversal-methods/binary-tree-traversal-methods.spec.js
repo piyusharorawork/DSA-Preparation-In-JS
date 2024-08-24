@@ -4,11 +4,11 @@ import {
   preOrderTraversal,
   postOrderTraversal,
 } from "./binary-tree-traversal-methods";
-import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
+import { createBinaryTree } from "../../../data-structures/binary-tree";
 
 describe("binary tree traversal methods", () => {
   test("pre order traversal", () => {
-    const root = createBinaryTreeFromArray([
+    const root = createBinaryTree([
       1,
       2,
       3,
@@ -28,7 +28,7 @@ describe("binary tree traversal methods", () => {
   });
 
   test("in order traversal", () => {
-    const root = createBinaryTreeFromArray([
+    const root = createBinaryTree([
       1,
       2,
       3,
@@ -48,7 +48,7 @@ describe("binary tree traversal methods", () => {
   });
 
   test("post order traversal", () => {
-    const root = createBinaryTreeFromArray([
+    const root = createBinaryTree([
       1,
       2,
       3,

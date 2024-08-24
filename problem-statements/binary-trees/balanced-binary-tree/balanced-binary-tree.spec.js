@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { isBalanced } from "./balanced-binary-tree";
-import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
+import { createBinaryTree } from "../../../data-structures/binary-tree";
 
 describe("balanced binary tree", () => {
   const scenerios = [
@@ -28,7 +28,7 @@ describe("balanced binary tree", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const root = createBinaryTreeFromArray(scenerio.values);
+      const root = createBinaryTree(scenerio.values);
       const actual = isBalanced(root);
       expect(actual).toBe(scenerio.expected);
     });

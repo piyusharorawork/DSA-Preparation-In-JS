@@ -1,6 +1,7 @@
 import { expect, describe, test } from "vitest";
 import { invertTree } from "./invert-binary-tree";
-import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
+import { createBinaryTree } from "../../../data-structures/binary-tree";
+import { convertBinaryTreeToArray } from "../../../helpers/tree-helpers";
 
 describe("invert binary tree", () => {
   const scenerios = [
@@ -18,12 +19,10 @@ describe("invert binary tree", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const root = createBinaryTreeFromArray(scenerio.values);
+      const root = createBinaryTree(scenerio.values);
       const actual = invertTree(root);
-
-      // TODO requires a function that takes a tree and returns the array
-      // const actualArray = createBinaryTreeFromArray(actual);
-      // expect(actualArray).toStrictEqual(scenerio.expected);
+      const actualArray = convertBinaryTreeToArray(actual);
+      expect(actualArray).toStrictEqual(scenerio.expected);
     });
   }
 });

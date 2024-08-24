@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { getNodesTree } from "./get-nodes-tree";
-import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
+import { createBinaryTree } from "../../../data-structures/binary-tree";
 
 describe("get nodes tree", () => {
   const scenerios = [
@@ -13,7 +13,7 @@ describe("get nodes tree", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const root = createBinaryTreeFromArray(scenerio.values);
+      const root = createBinaryTree(scenerio.values);
       const actual = getNodesTree(root);
       expect(actual).toBe(scenerio.expected);
     });

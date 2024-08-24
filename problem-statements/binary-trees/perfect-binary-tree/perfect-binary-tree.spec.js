@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { isPerfectBinaryTree } from "./perfect-binary-tree";
-import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
+import { createBinaryTree } from "../../../data-structures/binary-tree";
 
 describe("perfect binary tree", () => {
   const scenerios = [
@@ -33,7 +33,7 @@ describe("perfect binary tree", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const root = createBinaryTreeFromArray(scenerio.values);
+      const root = createBinaryTree(scenerio.values);
       const actual = isPerfectBinaryTree(root);
       expect(actual).toBe(scenerio.expected);
     });

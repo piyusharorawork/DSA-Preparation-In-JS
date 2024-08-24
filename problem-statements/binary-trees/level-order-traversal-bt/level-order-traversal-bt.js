@@ -1,4 +1,4 @@
-import { Queue } from "../implement-queue/queue";
+import { Queue } from "../../../data-structures/queue";
 
 export function levelOrder(root) {
   if (root === null) {

@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { diameterOfBinaryTree } from "./diameter-binary-tree";
-import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
+import { createBinaryTree } from "../../../data-structures/binary-tree";
 
 describe("diameter binary tree", () => {
   const scenerios = [
@@ -18,7 +18,7 @@ describe("diameter binary tree", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const root = createBinaryTreeFromArray(scenerio.values);
+      const root = createBinaryTree(scenerio.values);
       const actual = diameterOfBinaryTree(root);
       expect(actual).toBe(scenerio.expected);
     });

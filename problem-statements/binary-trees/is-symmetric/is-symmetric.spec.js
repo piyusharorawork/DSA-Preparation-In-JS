@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { isSymmetric } from "./is-symmetric";
-import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
+import { createBinaryTree } from "../../../data-structures/binary-tree";
 
 describe("is symmetric", () => {
   const scenerios = [
@@ -23,7 +23,7 @@ describe("is symmetric", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const root = createBinaryTreeFromArray(scenerio.values);
+      const root = createBinaryTree(scenerio.values);
       const actual = isSymmetric(root);
       expect(actual).toBe(scenerio.expected);
     });

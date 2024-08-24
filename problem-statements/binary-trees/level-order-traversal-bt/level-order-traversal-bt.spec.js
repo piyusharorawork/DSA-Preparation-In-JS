@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { levelOrder } from "./level-order-traversal-bt";
-import { createBinaryTreeFromArray } from "../create-binary-tree-from-array/create-binary-tree-from-array";
+import { createBinaryTree } from "../../../data-structures/binary-tree";
 
 describe("level order traversal bt", () => {
   const scenerios = [
@@ -23,7 +23,7 @@ describe("level order traversal bt", () => {
 
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
-      const root = createBinaryTreeFromArray(scenerio.values);
+      const root = createBinaryTree(scenerio.values);
       const actual = levelOrder(root);
       expect(actual).toStrictEqual(scenerio.expected);
     });
