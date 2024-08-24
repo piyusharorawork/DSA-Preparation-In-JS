@@ -21,3 +21,29 @@ export function convertBinaryTreeToArray(root) {
 
   return result;
 }
+
+export function displayBinaryTree(root) {
+  console.log("###################################################");
+
+  const helper = (node = root, prefix = "", isLeft = true) => {
+    if (node === null) return;
+
+    if (node === null) {
+      console.log(`${prefix}${isLeft ? "└── " : "┌── "}null`);
+      return;
+    }
+
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.val}`);
+
+    const newPrefix = `${prefix}${isLeft ? "    " : "│   "}`;
+
+    if (node.left || node.right) {
+      if (node.right) helper(node.right, newPrefix, false);
+      if (node.left) helper(node.left, newPrefix, true);
+    }
+  };
+
+  helper();
+
+  console.log("###################################################");
+}
