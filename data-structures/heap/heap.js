@@ -3,102 +3,174 @@ export class MinHeap {
     this.elements = [];
   }
 
-  // Adds a new element to the heap
-  insert(val) {
-    this.elements.push(val);
+  insert(value) {
+    this.elements.push(value);
     this.siftUp(this.size() - 1);
   }
 
-  // Remove the value from heap
   remove() {
-    if (this.isEmpty()) {
-      throw "cannot remove from empty heap";
-    }
-    const minVal = this.elements[0];
-    const lastVal = this.elements.pop();
+    const minValue = this.peek();
+    const lastValue = this.elements.pop();
 
     if (this.elements.length > 0) {
-      this.elements[0] = lastVal;
+      this.elements[0] = lastValue;
       this.siftDown(0);
     }
-    return minVal;
+
+    return minValue;
+  }
+
+  peek() {
+    return this.elements[0];
+  }
+
+  size() {
+    return this.elements.length;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
   }
 
   swap(i, j) {
     [this.elements[i], this.elements[j]] = [this.elements[j], this.elements[i]];
   }
 
-  getParentIndex(index) {
-    return Math.floor((index - 1) / 2);
-  }
-
-  getLeftChildIndex(index) {
-    return 2 * index + 1;
-  }
-
-  getRightChildIndex(index) {
-    return 2 * index + 2;
+  heapify(values) {
+    this.elements = values;
+    for (let i = this.size() - 1; i >= 0; i--) {
+      this.siftDown(i);
+    }
   }
 
   siftUp(index) {
     while (index > 0) {
-      const parentIndex = this.getParentIndex(index);
-      const parentVal = this.elements[parentIndex];
-      const currentVal = this.elements[index];
-      if (parentVal <= currentVal) break;
+      const parentIndex = Math.floor((index - 1) / 2);
+      if (this.elements[parentIndex] <= this.elements[index]) break;
       this.swap(parentIndex, index);
       index = parentIndex;
     }
   }
 
   siftDown(index) {
-    const length = this.elements.length;
+    const N = this.size();
     const element = this.elements[index];
 
     while (true) {
-      const leftChildIndex = this.getLeftChildIndex(index);
-      const rightChildIndex = this.getRightChildIndex(index);
+      const leftChildIndex = 2 * index + 1;
+      const rightChildIndex = 2 * index + 2;
+
+      let leftChild, rightChild;
+      let swapIndex = null;
 
       // If left child exists
-      if (leftChildIndex < length) {
-        const leftChild = this.elements[leftChildIndex];
+      if (leftChildIndex < N) {
+        leftChild = this.elements[leftChildIndex];
         if (leftChild < element) {
-          this.swap(leftChildIndex, index);
-          index = leftChildIndex;
-          continue;
+          swapIndex = leftChildIndex;
         }
       }
 
       // If right child exists
-      if (rightChildIndex < length) {
-        const rightChild = this.elements[rightChildIndex];
-        if (rightChild < element) {
-          this.swap(rightChildIndex, index);
-          index = rightChildIndex;
-          continue;
+      if (rightChildIndex < N) {
+        rightChild = this.elements[rightChildIndex];
+        if (
+          (swapIndex === null && rightChild < element) ||
+          (swapIndex !== null && rightChild < leftChild)
+        ) {
+          swapIndex = rightChildIndex;
         }
       }
 
-      // When no left and right child exists
-      break;
+      // If no swap needed, break out of the loop
+      if (swapIndex === null) break;
+
+      this.swap(swapIndex, index);
+      index = swapIndex;
     }
   }
+}
 
-  // Returns the minimum value from the heap
-  getMin() {
+export class MaxHeap {
+  constructor() {
+    this.elements = [];
+  }
+
+  insert(val) {
+    this.elements.push(val);
+    this.siftUp(this.size() - 1);
+  }
+
+  remove() {
+    const maxVal = this.peek();
+    const lastVal = this.elements.pop();
+
+    if (this.size() > 0) {
+      this.elements[0] = lastVal;
+      this.siftDown(0);
+    }
+
+    return maxVal;
+  }
+
+  peek() {
     return this.elements[0];
   }
 
-  // Returns number of elements in heap
   size() {
     return this.elements.length;
   }
 
-  // Take an unordered array and construct a heap
-  heapify() {}
-
-  // To check if the heap has elements or not
   isEmpty() {
     return this.size() === 0;
+  }
+
+  heapify(values) {
+    this.elements = values;
+    for (let i = this.size() - 1; i >= 0; i--) {
+      this.siftDown(i);
+    }
+  }
+
+  swap(i, j) {
+    [this.elements[i], this.elements[j]] = [this.elements[j], this.elements[i]];
+  }
+
+  siftUp(index) {
+    while (index > 0) {
+      const parentIndex = Math.floor((index - 1) / 2);
+      if (this.elements[parentIndex] >= this.elements[index]) break;
+      this.swap(parentIndex, index);
+      index = parentIndex;
+    }
+  }
+
+  siftDown(index) {
+    while (true) {
+      let swapIndex = null;
+
+      const leftChildIndex = 2 * index + 1;
+      if (
+        leftChildIndex < this.size() &&
+        this.elements[index] < this.elements[leftChildIndex]
+      ) {
+        swapIndex = leftChildIndex;
+      }
+
+      const rightChildIndex = 2 * index + 2;
+      if (
+        (rightChildIndex < this.size() &&
+          swapIndex === null &&
+          this.elements[index] < this.elements[rightChildIndex]) ||
+        (swapIndex !== null &&
+          this.elements[leftChildIndex] < this.elements[rightChildIndex])
+      ) {
+        swapIndex = rightChildIndex;
+      }
+
+      if (swapIndex === null) break;
+      this.swap(index, swapIndex);
+      index = swapIndex;
+    }
   }
 }
