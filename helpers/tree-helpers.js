@@ -33,7 +33,9 @@ export function displayBinaryTree(root) {
       return;
     }
 
-    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.val}`);
+    console.log(
+      `${prefix}${isLeft ? "└── " : "┌── "}${JSON.stringify(node.val)}`
+    );
 
     const newPrefix = `${prefix}${isLeft ? "    " : "│   "}`;
 

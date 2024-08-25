@@ -1,5 +1,5 @@
 import { displayHeap } from "../../helpers/heap-helpers";
-import { MaxHeap, MinHeap } from "./heap";
+import { MaxHeap, MinHeap, PriorityQueue } from "./heap";
 import { test, expect } from "vitest";
 
 test("min heap", () => {
@@ -58,4 +58,21 @@ test("max heap heapify", () => {
   maxHeap.remove(); // 7
   expect(maxHeap.remove()).toBe(5);
   expect(maxHeap.size()).toBe(4); // 4 3 3 2
+});
+
+test("priority queue", () => {
+  const pq = new PriorityQueue();
+  pq.insert("piyush", 90);
+  pq.insert("sumit", 70);
+  pq.insert("isha", 85);
+  pq.insert("varun", 88);
+  pq.insert("himani", 98);
+  pq.insert("kishore", 90);
+
+  expect(pq.peek()).toBe("himani");
+  pq.remove();
+  pq.remove();
+  pq.remove();
+  expect(pq.peek()).toBe("varun");
+  expect(pq.size()).toBe(3);
 });

@@ -174,3 +174,75 @@ export class MaxHeap {
     }
   }
 }
+
+export class PriorityQueue {
+  constructor() {
+    this.elements = [];
+  }
+
+  insert(data, priority) {
+    this.elements.push({ data, priority });
+    this.siftUp(this.size() - 1);
+  }
+
+  remove() {
+    const highest = this.elements[0];
+    const last = this.elements.pop();
+
+    if (this.size() > 0) {
+      this.elements[0] = last;
+      this.siftDown(0);
+    }
+    return highest.data;
+  }
+
+  peek() {
+    return this.elements[0].data;
+  }
+
+  size() {
+    return this.elements.length;
+  }
+
+  siftUp(index) {
+    while (index > 0) {
+      const parentIdx = Math.floor((index - 1) / 2);
+      if (this.elements[parentIdx].priority >= this.elements[index].priority)
+        break;
+      this.swap(index, parentIdx);
+      index = parentIdx;
+    }
+  }
+
+  siftDown(index) {
+    while (true) {
+      let swapIndex = null;
+
+      const leftIdx = 2 * index + 1;
+      if (
+        leftIdx < this.size() &&
+        this.elements[leftIdx].priority > this.elements[index].priority
+      )
+        swapIndex = leftIdx;
+
+      const rightIdx = 2 * index + 2;
+      if (rightIdx < this.size()) {
+        if (
+          (swapIndex === null &&
+            this.elements[rightIdx].priority > this.elements[index].priority) ||
+          (swapIndex !== null &&
+            this.elements[rightIdx].priority > this.elements[leftIdx].priority)
+        )
+          swapIndex = rightIdx;
+      }
+
+      if (swapIndex === null) break;
+      this.swap(index, swapIndex);
+      index = swapIndex;
+    }
+  }
+
+  swap(i, j) {
+    [this.elements[i], this.elements[j]] = [this.elements[j], this.elements[i]];
+  }
+}
