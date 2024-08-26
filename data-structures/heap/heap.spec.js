@@ -1,4 +1,5 @@
 import { displayHeap } from "../../helpers/heap-helpers";
+import { displayBinaryTree } from "../../helpers/tree-helpers";
 import { MaxHeap, MinHeap, PriorityQueue } from "./heap";
 import { test, expect } from "vitest";
 
@@ -62,17 +63,17 @@ test("max heap heapify", () => {
 
 test("priority queue", () => {
   const pq = new PriorityQueue();
-  pq.insert("piyush", 90);
-  pq.insert("sumit", 70);
-  pq.insert("isha", 85);
-  pq.insert("varun", 88);
-  pq.insert("himani", 98);
-  pq.insert("kishore", 90);
-
-  expect(pq.peek()).toBe("himani");
-  pq.remove();
-  pq.remove();
-  pq.remove();
-  expect(pq.peek()).toBe("varun");
-  expect(pq.size()).toBe(3);
+  pq.enqueue({ value: "piyush", priority: 92 });
+  pq.enqueue({ value: "himani", priority: 98 });
+  pq.enqueue({ value: "sumit", priority: 70 });
+  pq.enqueue({ value: "isha", priority: 85 });
+  pq.enqueue({ value: "varun", priority: 88 });
+  pq.enqueue({ value: "kishore", priority: 90 });
+  expect(pq.front().value).toBe("himani");
+  expect(pq.dequeue().value).toBe("himani");
+  expect(pq.dequeue().value).toBe("piyush");
+  expect(pq.dequeue().value).toBe("kishore");
+  expect(pq.dequeue().value).toBe("varun");
+  expect(pq.front().value).toBe("isha");
+  expect(pq.size()).toBe(2);
 });

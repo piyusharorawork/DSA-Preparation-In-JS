@@ -1,4 +1,5 @@
 import { PriorityQueue } from "../../../data-structures/heap/heap";
+import { displayHeap } from "../../../helpers/heap-helpers";
 
 // Using Custom Heap
 export function kClosestV1(points, k) {
@@ -58,63 +59,43 @@ export function kClosestV1(points, k) {
 }
 
 // Using Priority Queue for entire points
-export function kClosestV2(points, k) {
-  const N = points.length;
-
-  const distance = (index) => {
-    const point = points[index];
-    const [x, y] = point;
-    return Math.pow(x, 2) + Math.pow(y, 2);
-  };
-
-  const pq = new PriorityQueue();
-  for (let i = 0; i < N; i++) {
-    pq.insert(points[i], distance(i) * -1);
-  }
-
-  const result = [];
-  for (let i = 0; i < k; i++) {
-    const point = pq.remove().data;
-    result.push(point);
-  }
-
-  return result;
-}
-
-// Using Priority Queue for only k points
 export function kClosest(points, k) {
   const N = points.length;
 
-  const distance = (index) => {
-    const point = points[index];
-    return pointDistance(point);
-  };
-
-  const pointDistance = (point) => {
+  const distance = (point) => {
     const [x, y] = point;
     return Math.pow(x, 2) + Math.pow(y, 2);
   };
 
-  const pq = new PriorityQueue();
+  // create priority queue with larger distance
+  const pq = new PriorityQueue({
+    compare: (point1, point2) => point2.priority - point1.priority,
+  });
+
   for (let i = 0; i < N; i++) {
-    if (i < k) {
-      pq.insert(points[i], distance(i));
-    } else {
-      const maxPoint = pq.peek();
-      const maxDistance = pointDistance(maxPoint);
-      const currentDistance = pointDistance(points[i]);
-      if (maxDistance > currentDistance) {
-        pq.remove();
-        pq.insert(points[i], distance(i));
+    // We need to maintain fixed k size priority queue
+
+    // If i < k , we can just add it to
+    if (i < k) pq.enqueue({ value: points[i], priority: distance(points[i]) });
+    else {
+      const newDist = distance(points[i]);
+      const maxDist = distance(pq.front().value);
+
+      // if new distance is smaller than max distance
+      // then we should add the new point to the queue
+      // but before that we need to remove the currnet max
+      if (newDist < maxDist) {
+        pq.dequeue();
+        pq.enqueue({ value: points[i], priority: newDist });
       }
     }
   }
 
+  // now just get the values from p and push it to result
   const result = new Array(k);
   for (let i = k - 1; i >= 0; i--) {
-    const point = pq.remove();
+    const point = pq.dequeue().value;
     result[i] = point;
   }
-
   return result;
 }

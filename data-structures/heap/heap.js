@@ -175,74 +175,187 @@ export class MaxHeap {
   }
 }
 
-export class PriorityQueue {
-  constructor() {
+export class PriorityQueueV1 {
+  constructor(comparator) {
     this.elements = [];
+    this.comparator =
+      comparator === undefined
+        ? (a, b) => {
+            return b.priority - a.priority;
+          }
+        : comparator;
   }
 
-  insert(data, priority) {
-    this.elements.push({ data, priority });
-    this.siftUp(this.size() - 1);
+  parentIndex(index) {
+    return Math.floor((index - 1) / 2);
+  }
+
+  leftChildIndex(index) {
+    return 2 * index + 1;
+  }
+
+  rightChildIndex(index) {
+    return 2 * index + 2;
+  }
+
+  swap(index1, index2) {
+    [this.elements[index1], this.elements[index2]] = [
+      this.elements[index2],
+      this.elements[index1],
+    ];
+  }
+
+  insert(data) {
+    this.elements.push(data);
+    this.heapifyUp();
   }
 
   remove() {
-    const highest = this.elements[0];
-    const last = this.elements.pop();
+    if (this.size() === 0) throw "priorty queue is empty";
+    if (this.size() === 1) return this.elements.pop();
 
-    if (this.size() > 0) {
-      this.elements[0] = last;
-      this.siftDown(0);
-    }
-    return highest.data;
-  }
-
-  peek() {
-    return this.elements[0].data;
+    const topVal = this.elements[0];
+    const lastElement = this.elements.pop();
+    this.elements[0] = lastElement;
+    this.heapifyDown();
+    return topVal;
   }
 
   size() {
     return this.elements.length;
   }
 
-  siftUp(index) {
+  peek() {
+    if (this.size() === 0) throw "priority queue is empty";
+    return this.elements[0];
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  heapifyUp() {
+    let index = this.size() - 1;
     while (index > 0) {
-      const parentIdx = Math.floor((index - 1) / 2);
-      if (this.elements[parentIdx].priority >= this.elements[index].priority)
+      const parent = this.parentIndex(index);
+
+      // Not to swap when priority of parent is already greater than index
+      if (this.comparator(this.elements[index], this.elements[parent]) >= 0)
         break;
-      this.swap(index, parentIdx);
-      index = parentIdx;
+
+      this.swap(index, parent);
+      index = parent;
     }
   }
 
-  siftDown(index) {
-    while (true) {
-      let swapIndex = null;
+  heapifyDown() {
+    let index = 0;
+    while (this.leftChildIndex(index) < this.size()) {
+      let max = this.leftChildIndex(index);
+      const right = this.rightChildIndex(index);
 
-      const leftIdx = 2 * index + 1;
+      // maximise max from right
       if (
-        leftIdx < this.size() &&
-        this.elements[leftIdx].priority > this.elements[index].priority
-      )
-        swapIndex = leftIdx;
-
-      const rightIdx = 2 * index + 2;
-      if (rightIdx < this.size()) {
-        if (
-          (swapIndex === null &&
-            this.elements[rightIdx].priority > this.elements[index].priority) ||
-          (swapIndex !== null &&
-            this.elements[rightIdx].priority > this.elements[leftIdx].priority)
-        )
-          swapIndex = rightIdx;
+        right < this.size() &&
+        this.comparator(this.elements[max], this.elements[right]) > 0
+      ) {
+        max = right;
       }
 
-      if (swapIndex === null) break;
-      this.swap(index, swapIndex);
-      index = swapIndex;
+      // if parent is already the max , do not continue
+      if (this.comparator(this.elements[max], this.elements[index]) > 0) break;
+
+      this.swap(max, index);
+      index = max;
+    }
+  }
+}
+
+export class PriorityQueue {
+  constructor(options) {
+    this.elements = [];
+    const defaultComparator = (a, b) => b.priority - a.priority;
+    if (!options) {
+      this.comparator = defaultComparator;
+    } else {
+      this.comparator =
+        options.compare === undefined ? defaultComparator : options.compare;
     }
   }
 
-  swap(i, j) {
-    [this.elements[i], this.elements[j]] = [this.elements[j], this.elements[i]];
+  enqueue(data) {
+    this.elements.push(data);
+    this.heapifyUp();
+  }
+
+  front() {
+    return this.elements[0];
+  }
+
+  dequeue() {
+    if (this.size() === 1) return this.elements.pop();
+    const lastElement = this.elements.pop();
+    const top = this.elements[0];
+    this.elements[0] = lastElement;
+    this.heapifyDown();
+    return top;
+  }
+
+  size() {
+    return this.elements.length;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  heapifyUp() {
+    let index = this.size() - 1;
+    while (index > 0) {
+      const parent = Math.floor((index - 1) / 2);
+      // if parent priority is already greater than index , break
+      if (this.comparator(this.elements[index], this.elements[parent]) >= 0)
+        break;
+
+      // Now we know the priority of index is greater than parent
+      // we need to swap it
+      this.swap(parent, index);
+      index = parent;
+    }
+  }
+
+  heapifyDown() {
+    let index = 0;
+
+    while (true) {
+      const left = 2 * index + 1;
+      let max = index;
+      if (left < this.size()) {
+        // assume left index has the maximum priority
+        max = left;
+      }
+
+      const right = 2 * index + 2;
+      if (
+        right < this.size() &&
+        this.comparator(this.elements[max], this.elements[right]) > 0
+      ) {
+        max = right;
+      }
+
+      // break if the parent priority is already greater than max or same as max
+      if (this.comparator(this.elements[max], this.elements[index]) >= 0) break;
+
+      // now we now max has the greater priority than parent , we need to swap it
+      this.swap(index, max);
+      index = max;
+    }
+  }
+
+  swap(index1, index2) {
+    [this.elements[index1], this.elements[index2]] = [
+      this.elements[index2],
+      this.elements[index1],
+    ];
   }
 }

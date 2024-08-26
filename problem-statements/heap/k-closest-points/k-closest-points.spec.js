@@ -4,28 +4,28 @@ import { arraysMatch } from "../../../helpers/array-helpers";
 
 describe("k closest-points", () => {
   const scenerios = [
-    // {
-    //   name: "2 points",
-    //   points: [
-    //     [1, 3],
-    //     [-2, 2],
-    //   ],
-    //   k: 1,
-    //   expected: [[-2, 2]],
-    // },
-    // {
-    //   name: "3 points",
-    //   points: [
-    //     [3, 3],
-    //     [5, -1],
-    //     [-2, 4],
-    //   ],
-    //   k: 2,
-    //   expected: [
-    //     [3, 3],
-    //     [-2, 4],
-    //   ],
-    // },
+    {
+      name: "2 points",
+      points: [
+        [1, 3],
+        [-2, 2],
+      ],
+      k: 1,
+      expected: [[-2, 2]],
+    },
+    {
+      name: "3 points",
+      points: [
+        [3, 3],
+        [5, -1],
+        [-2, 4],
+      ],
+      k: 2,
+      expected: [
+        [3, 3],
+        [-2, 4],
+      ],
+    },
     {
       name: "10 points",
       points: [
