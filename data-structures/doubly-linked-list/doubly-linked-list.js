@@ -12,6 +12,7 @@ export class DoublyLinkedList {
     this.tail = null;
   }
 
+  // O1
   insertBeg(val) {
     const node = new DoublyLinkedListNode(val);
 
@@ -28,6 +29,7 @@ export class DoublyLinkedList {
     }
   }
 
+  // O1
   insertEnd(val) {
     const node = new DoublyLinkedListNode(val);
     if (this.head === null) {
@@ -40,6 +42,7 @@ export class DoublyLinkedList {
     }
   }
 
+  // O1
   deleteBeg() {
     if (this.head === null) {
       throw "no nodes left to delete";
@@ -52,6 +55,7 @@ export class DoublyLinkedList {
     return curr.val;
   }
 
+  // O1
   deleteEnd() {
     if (this.tail === null) {
       throw "no nodes left to delete";
@@ -63,6 +67,7 @@ export class DoublyLinkedList {
     return curr.val;
   }
 
+  // ON
   deleteNode(val) {
     // No nodes
     if (this.head === null) throw "no nodes found";
@@ -90,6 +95,7 @@ export class DoublyLinkedList {
     throw `no node with val ${val} found`;
   }
 
+  // ON
   search(val) {
     if (this.head === null) return null;
 
@@ -103,6 +109,7 @@ export class DoublyLinkedList {
     return null;
   }
 
+  // ON
   update(val, newVal) {
     if (this.head === null) throw "empty list";
     let cur = this.head;
@@ -118,6 +125,7 @@ export class DoublyLinkedList {
     throw "element not found";
   }
 
+  // ON
   getElementsArray() {
     const elements = [];
     let curr = this.head;
@@ -126,5 +134,10 @@ export class DoublyLinkedList {
       curr = curr.next;
     }
     return elements;
+  }
+
+  // O1
+  isEmpty() {
+    return this.head === null;
   }
 }
