@@ -1,0 +1,41 @@
+import { expect, test, describe } from "vitest";
+import { DoublyLinkedList } from "./doubly-linked-list";
+
+test("doubly linked list", () => {
+  const dll = new DoublyLinkedList();
+
+  dll.insertBeg(1);
+  dll.insertBeg(2);
+  expect(dll.getElementsArray()).toStrictEqual([2, 1]);
+  dll.insertBeg(3);
+  expect(dll.getElementsArray()).toStrictEqual([3, 2, 1]);
+  dll.insertEnd(4);
+  expect(dll.getElementsArray()).toStrictEqual([3, 2, 1, 4]);
+  dll.insertEnd(5);
+  expect(dll.getElementsArray()).toStrictEqual([3, 2, 1, 4, 5]);
+  expect(dll.deleteBeg()).toBe(3);
+  expect(dll.getElementsArray()).toStrictEqual([2, 1, 4, 5]);
+  expect(dll.deleteBeg()).toBe(2);
+  expect(dll.getElementsArray()).toStrictEqual([1, 4, 5]);
+  expect(dll.deleteEnd()).toBe(5);
+  expect(dll.getElementsArray()).toStrictEqual([1, 4]);
+  expect(dll.deleteEnd()).toBe(4);
+  expect(dll.getElementsArray()).toStrictEqual([1]);
+  dll.insertEnd(2);
+  dll.insertEnd(3);
+  dll.insertEnd(4);
+  dll.insertEnd(5);
+  expect(dll.getElementsArray()).toStrictEqual([1, 2, 3, 4, 5]);
+  dll.deleteNode(3);
+  expect(dll.getElementsArray()).toStrictEqual([1, 2, 4, 5]);
+  dll.deleteNode(4);
+  expect(dll.getElementsArray()).toStrictEqual([1, 2, 5]);
+  expect(dll.search(100)).toBe(null);
+  expect(dll.search(2).val).toBe(2);
+  expect(dll.search(5).val).toBe(5);
+  expect(dll.getElementsArray()).toStrictEqual([1, 2, 5]);
+  dll.update(2, 20);
+  expect(dll.getElementsArray()).toStrictEqual([1, 20, 5]);
+  dll.update(5, 50);
+  expect(dll.getElementsArray()).toStrictEqual([1, 20, 50]);
+});
