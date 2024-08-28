@@ -30,12 +30,4 @@ test("doubly linked list", () => {
   expect(dll.getElementsArray()).toStrictEqual([1, 2, 4, 5]);
   dll.deleteNode(node4);
   expect(dll.getElementsArray()).toStrictEqual([1, 2, 5]);
-  expect(dll.search(100)).toBe(null);
-  expect(dll.search(2).val).toBe(2);
-  expect(dll.search(5).val).toBe(5);
-  expect(dll.getElementsArray()).toStrictEqual([1, 2, 5]);
-  dll.update(2, 20);
-  expect(dll.getElementsArray()).toStrictEqual([1, 20, 5]);
-  dll.update(5, 50);
-  expect(dll.getElementsArray()).toStrictEqual([1, 20, 50]);
 });

@@ -15,6 +15,7 @@ export class LRUCache {
     const node = this.map[key];
     this.dll.deleteNode(node);
     this.dll.insertBeg(node.val);
+    this.map[key] = this.dll.head;
 
     return node.val.value;
   }
@@ -26,6 +27,7 @@ export class LRUCache {
       node.val.value = value;
       this.dll.deleteNode(node);
       this.dll.insertBeg(node.val);
+      this.map[key] = this.dll.head;
       return;
     }
 

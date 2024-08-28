@@ -82,75 +82,18 @@ export class DoublyLinkedList {
     return curr;
   }
 
-  // ON
+  // O1
   deleteNode(node) {
     // No nodes
     if (this.head === null) throw "no nodes found";
 
-    // Only one node
-    if (this.head.next === null) {
-      if (this.head.val === node.val) {
-        this.head = null;
-        return;
-      }
-    }
+    if (this.head === node) return this.deleteBeg(this.head);
 
-    // if there are only 2 nodes
-    if (this.head.next === this.tail) {
-      if (this.tail.val === node.val) {
-        this.tail = this.head;
-        this.head.next = null;
-        this.head.prev = null;
-        return;
-      }
-    }
+    if (this.tail === node) return this.deleteEnd(this.head);
 
-    // Now there are more than 2 nodes
-
-    let cur = this.head.next;
-    while (cur !== null) {
-      if (cur.val === node.val) {
-        cur.prev.next = cur.next;
-        if (cur.next) {
-          cur.next.prev = cur.prev;
-        }
-
-        return cur;
-      }
-      cur = cur.next;
-    }
-
-    return;
-  }
-
-  // ON
-  search(val) {
-    if (this.head === null) return null;
-
-    let cur = this.head;
-    while (cur !== null) {
-      if (cur.val === val) return cur;
-
-      cur = cur.next;
-    }
-
-    return null;
-  }
-
-  // ON
-  update(val, newVal) {
-    if (this.head === null) throw "empty list";
-    let cur = this.head;
-    while (cur !== null) {
-      if (cur.val === val) {
-        cur.val = newVal;
-        return cur;
-      }
-
-      cur = cur.next;
-    }
-
-    throw "element not found";
+    node.prev.next = node.next;
+    node.next.prev = node.prev;
+    return node;
   }
 
   // ON
