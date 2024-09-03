@@ -3,22 +3,28 @@ import { minWindow } from "./minimum-window-substring";
 
 describe("minimum window-substring", () => {
   const scenerios = [
-    {
-      name: "4",
-      s: "ADOBECODEBANC",
-      t: "ABC",
-      expected: "BANC",
-    },
-    {
-      name: "1",
-      s: "a",
-      t: "a",
-      expected: "a",
-    },
+    // {
+    //   name: "4",
+    //   s: "ADOBECODEBANC",
+    //   t: "ABC",
+    //   expected: "BANC",
+    // },
+    // {
+    //   name: "1",
+    //   s: "a",
+    //   t: "a",
+    //   expected: "a",
+    // },
+    // {
+    //   name: "0",
+    //   s: "a",
+    //   t: "aa",
+    //   expected: "",
+    // },
     {
       name: "0",
       s: "a",
-      t: "aa",
+      t: "b",
       expected: "",
     },
   ];

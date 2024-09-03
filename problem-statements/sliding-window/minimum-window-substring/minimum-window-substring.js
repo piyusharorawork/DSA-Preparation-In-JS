@@ -61,6 +61,7 @@ export function minWindow(s, t) {
   let formed = 0;
 
   // minmimm window substring  result
+  let isFound = false;
   let result = s;
 
   // char count in window
@@ -81,6 +82,8 @@ export function minWindow(s, t) {
     // we need to minify the substring length
     // shift left window towards right
     while (left <= right && required === formed) {
+      isFound = true;
+
       // miniy substr
       const substr = s.substring(left, right + 1);
       if (substr.length < result.length) result = substr;
@@ -98,5 +101,5 @@ export function minWindow(s, t) {
     right++;
   }
 
-  return result;
+  return isFound ? result : "";
 }
