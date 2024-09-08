@@ -1,24 +1,38 @@
-export function convertGraphToArray(node) {
-  if (node === null) {
-    return [];
-  }
+export function convertGraphNodeToArray(node) {
+  if (node === null) return [];
 
-  const adjacencyArray = [];
+  const result = [];
   const visited = new Set();
 
-  const traverse = (node) => {
+  const dfs = (node) => {
     if (visited.has(node.val)) return;
+
     visited.add(node.val);
 
-    adjacencyArray[node.val - 1] = [];
-
+    result[node.val - 1] = [];
     for (const neighbor of node.neighbors) {
-      adjacencyArray[node.val - 1].push(neighbor.val);
-      traverse(neighbor);
+      result[node.val - 1].push(neighbor.val);
+      dfs(neighbor);
     }
   };
 
-  traverse(node);
+  dfs(node);
+  return result;
+}
 
-  return adjacencyArray;
+export function convertGraphToArray(nodes) {
+  if (nodes.length === 0) return [];
+
+  const N = nodes.length;
+  const nodesList = [];
+
+  for (const node of nodes) {
+    const neighbors = [];
+    for (const neighbor of node.neighbors) {
+      neighbors.push(neighbor.val);
+    }
+    nodesList.push(neighbors);
+  }
+
+  return nodesList;
 }

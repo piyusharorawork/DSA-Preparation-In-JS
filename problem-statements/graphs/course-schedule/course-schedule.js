@@ -1,5 +1,6 @@
 import { Node } from "../../../data-structures/graph/graph";
 
+// without memorisation
 export function canFinishV1(numCourses, prerequisites) {
   const nodes = new Array(numCourses);
   for (let i = 0; i < numCourses; i++) {
@@ -45,7 +46,8 @@ export function canFinishV1(numCourses, prerequisites) {
   return true;
 }
 
-export function canFinish(numCourses, prerequisites) {
+// with memorisation
+export function canFinishV2(numCourses, prerequisites) {
   const nodes = new Array(numCourses);
   for (let i = 0; i < numCourses; i++) {
     nodes[i] = new Node(i);
@@ -87,6 +89,41 @@ export function canFinish(numCourses, prerequisites) {
   for (const node of nodes) {
     const cycle = hasCycle(node);
     if (cycle) return false;
+  }
+
+  return true;
+}
+
+// without node
+export function canFinish(numCourses, prerequisites) {
+  const graph = new Array(numCourses).fill(0).map(() => []);
+
+  // build graph using adjacency list
+  for (const item of prerequisites) {
+    const [course, prerequisites] = item;
+    graph[prerequisites].push(course);
+  }
+
+  const visited = new Set();
+  const path = new Set();
+
+  const hasCycle = (node) => {
+    if (path.has(node)) return true;
+    if (visited.has(node)) return false;
+
+    path.add(node);
+    visited.add(node);
+
+    for (const neighbor of graph[node]) {
+      if (hasCycle(neighbor)) return true;
+    }
+
+    path.delete(node);
+    return false;
+  };
+
+  for (let i = 0; i < numCourses; i++) {
+    if (hasCycle(i)) return false;
   }
 
   return true;
