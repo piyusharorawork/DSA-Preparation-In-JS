@@ -163,28 +163,18 @@ export function coinChangeV6(coins, amount) {
 export function coinChange(coins, amount) {
   const N = coins.length;
 
-  const cache = Array.from({ length: N + 1 }, () =>
-    new Array(amount + 1).fill(-1)
-  );
-
-  const helper = (n = N, remaining = amount) => {
-    if (remaining === 0) {
-      return 0;
-    }
-    if (n === 0 || remaining < 0) return Infinity;
-
-    if (cache[n][remaining] !== -1) return cache[n][remaining];
+  const dfs = (n = N, remaining = amount) => {
+    if (remaining === 0) return 0;
+    if (n === 0) return Infinity;
 
     const value = coins[n - 1];
-    const result =
-      value <= remaining
-        ? Math.min(1 + helper(n, remaining - value), helper(n - 1, remaining))
-        : helper(n - 1, remaining);
-    cache[n][remaining] = result;
-    return result;
+    if (value <= remaining) {
+      return Math.min(1 + dfs(n, remaining - value), dfs(n - 1, remaining));
+    }
+    return dfs(n - 1, remaining);
   };
 
-  const minCoins = helper();
+  const minCoins = dfs();
 
   return minCoins === Infinity ? -1 : minCoins;
 }

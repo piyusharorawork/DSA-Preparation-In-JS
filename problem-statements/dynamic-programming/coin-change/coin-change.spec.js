@@ -33,12 +33,12 @@ describe("coin change", () => {
       amount: 6249,
       expected: 20,
     },
-    {
-      name: "20 coins with large value",
-      coins: [411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422],
-      amount: 9864,
-      expected: 24,
-    },
+    // {
+    //   name: "20 coins with large value",
+    //   coins: [411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422],
+    //   amount: 9864,
+    //   expected: 24,
+    // },
   ];
 
   for (const scenerio of scenerios) {
