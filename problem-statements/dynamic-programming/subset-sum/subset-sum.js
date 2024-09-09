@@ -1,7 +1,6 @@
 // Using only recursion
 export function subsetSumV1(nums, target) {
   const N = nums.length;
-  nums.sort((a, b) => a - b);
 
   const helper = (n = N, remaining = target) => {
     if (remaining === 0) return true;
@@ -79,7 +78,7 @@ export function subsetSumV3(nums, target) {
   return table[N][target];
 }
 
-export function subsetSum(nums, target) {
+export function subsetSumV4(nums, target) {
   const N = nums.length;
 
   const table = Array.from({ length: N + 1 }, () => new Array(target + 1));
@@ -99,6 +98,89 @@ export function subsetSum(nums, target) {
         // dont include the subarray
         else {
           table[n][remaining] = table[n - 1][remaining];
+        }
+      }
+    }
+  }
+  return table[N][target];
+}
+
+// Bottom up recursion using current sum
+export function subsetSumV5(nums, target) {
+  const N = nums.length;
+
+  const dfs = (n = N, currentSum = 0) => {
+    if (currentSum === target) return true;
+    if (n === 0) return false;
+
+    const num = nums[n - 1];
+    if (num + currentSum <= target) {
+      return dfs(n - 1, currentSum) || dfs(n - 1, currentSum + num);
+    } else {
+      return dfs(n - 1, currentSum);
+    }
+  };
+
+  return dfs();
+}
+
+// Cleaner recursion apt for memorisation
+export function subsetSumV6(nums, target) {
+  const N = nums.length;
+
+  const dfs = (n = N, currentSum = 0) => {
+    if (currentSum === target) return true;
+    if (n === 0) return false;
+
+    const num = nums[n - 1];
+    return dfs(n - 1, currentSum) || dfs(n - 1, currentSum + num);
+  };
+
+  return dfs();
+}
+
+// recursion with memorisation
+export function subsetSumV7(nums, target) {
+  const N = nums.length;
+  const cache = Array.from({ length: N + 1 }, () =>
+    new Array(target + 1).fill(-1)
+  );
+
+  const dfs = (n = N, currentSum = 0) => {
+    if (currentSum === target) return true;
+    if (n === 0 || currentSum > target) return false;
+
+    if (cache[n][currentSum] !== -1) return cache[n][currentSum];
+
+    const num = nums[n - 1];
+    const result = dfs(n - 1, currentSum) || dfs(n - 1, currentSum + num);
+    cache[n][currentSum] = result;
+    return result;
+  };
+
+  return dfs();
+}
+
+export function subsetSum(nums, target) {
+  const N = nums.length;
+
+  const table = Array.from({ length: N + 1 }, () => new Array(target + 1));
+
+  for (let n = 0; n < table.length; n++) {
+    for (let currentSum = 0; currentSum < table[0].length; currentSum++) {
+      if (currentSum === 0) table[n][currentSum] = true;
+      else if (n === 0) table[n][currentSum] = false;
+      else {
+        const num = nums[n - 1];
+        // subarray may be included
+        if (num <= currentSum) {
+          table[n][currentSum] =
+            table[n - 1][currentSum - num] || table[n - 1][currentSum];
+        }
+
+        // dont include the subarray
+        else {
+          table[n][currentSum] = table[n - 1][currentSum];
         }
       }
     }
