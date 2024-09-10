@@ -25,7 +25,7 @@ export function heightTreeV1(root) {
 }
 
 // Bottom up approach
-export function heightTree(root) {
+export function heightTreeV2(root) {
   if (root === null) {
     return 0;
   }
@@ -34,4 +34,19 @@ export function heightTree(root) {
   const rightHeight = heightTree(root.right);
 
   return 1 + Math.max(leftHeight, rightHeight);
+}
+
+export function heightTree(root) {
+  const cache = {};
+
+  const height = (node) => {
+    if (node === null) return 0;
+    if (cache[node]) return cache[node];
+
+    const result = 1 + Math.max(height(node.left), height(node.right));
+    cache[node] = result;
+    return result;
+  };
+
+  return height(root);
 }
