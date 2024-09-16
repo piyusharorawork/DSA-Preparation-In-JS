@@ -14,6 +14,11 @@ describe("subsets 2", () => {
       nums: [0],
       expected: [[], [0]],
     },
+    {
+      name: "6 subsets unsorted",
+      nums: [2, 1, 2],
+      expected: [[], [1], [1, 2], [1, 2, 2], [2], [2, 2]],
+    },
   ];
 
   for (const scenerio of scenerios) {

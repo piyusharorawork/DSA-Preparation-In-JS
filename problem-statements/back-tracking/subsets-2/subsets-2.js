@@ -4,19 +4,18 @@ export function subsetsWithDup(nums) {
   const result = [];
   nums.sort((a, b) => a - b);
 
-  const backTrack = (start = 0, end = N, stack = []) => {
+  const dfs = (start = 0, stack = []) => {
     result.push([...stack]);
 
-    for (let i = start; i < end; i++) {
+    for (let i = start; i < N; i++) {
       if (i > start && nums[i] === nums[i - 1]) continue;
-
       stack.push(nums[i]);
-      backTrack(i + 1, end, stack);
+      dfs(i + 1, stack);
       stack.pop();
     }
   };
 
-  backTrack();
+  dfs();
 
   return result;
 }
