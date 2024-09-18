@@ -7,7 +7,8 @@
   "scripts": {
     "test": "npx vitest run",
     "test:watch": "npx vitest",
-    "generate": "node generators/generate-code.js"
+    "generate": "node generators/generate-code.js",
+    "generate-drawing": "node generators/generate-drawing.js"
   },
   "repository": {
     "type": "git",
