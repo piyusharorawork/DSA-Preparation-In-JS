@@ -88,7 +88,7 @@ export function permuationStringV3(s) {
   return result;
 }
 
-export function permuationString(s) {
+export function permuationStringV4(s) {
   const N = s.length;
   // to store list of permutations
   const result = [];
@@ -117,6 +117,38 @@ export function permuationString(s) {
 
   // We need to pass by reference
   backTrack(s.split(""));
+
+  return result;
+}
+
+export function permuationString(s) {
+  const N = s.length;
+  // to store list of permutations
+  const result = [];
+
+  const swap = (i, j) =>
+    ([permutation[i], permutation[j]] = [permutation[j], permutation[i]]);
+
+  const permutation = s.split("");
+
+  // back tracking
+  const backTrack = (start = 0) => {
+    if (start === N - 1) return result.push(permutation.join(""));
+
+    const processedChars = new Set();
+
+    for (let i = start; i < N; i++) {
+      if (processedChars.has(permutation[i])) continue; // already processed
+      processedChars.add(permutation[i]);
+
+      swap(i, start);
+      backTrack(start + 1);
+      swap(i, start);
+    }
+  };
+
+  // We need to pass by reference
+  backTrack();
 
   return result;
 }

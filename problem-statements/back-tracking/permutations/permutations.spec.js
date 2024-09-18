@@ -1,5 +1,6 @@
 import { test, describe, expect } from "vitest";
 import { permute } from "./permutations";
+import { arraysMatch } from "../../../helpers/array-helpers";
 
 describe("permutations 1", () => {
   const scenerios = [
@@ -33,7 +34,7 @@ describe("permutations 1", () => {
   for (const scenerio of scenerios) {
     test(scenerio.name, () => {
       const actual = permute(scenerio.nums);
-      expect(actual).toStrictEqual(scenerio.expected);
+      expect(arraysMatch(actual, scenerio.expected)).toBeTruthy();
     });
   }
 });

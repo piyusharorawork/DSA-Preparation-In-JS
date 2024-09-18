@@ -61,6 +61,33 @@ export function permuteUniqueV2(nums) {
   return result;
 }
 
+export function permuteUniqueV3(nums) {
+  const N = nums.length;
+  const result = [];
+  const backTrack = (start = 0) => {
+    const swap = (i, j) => {
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+    };
+
+    // Base Condition
+    if (start === N) return result.push([...nums]);
+
+    // processed nums
+    const processedNums = new Set();
+
+    for (let i = start; i < N; i++) {
+      if (processedNums.has(nums[i])) continue; // already processed
+      processedNums.add(nums[i]);
+
+      swap(i, start);
+      backTrack(start + 1);
+      swap(i, start);
+    }
+  };
+  backTrack();
+  return result;
+}
+
 export function permuteUnique(nums) {
   const N = nums.length;
   const result = [];
