@@ -37,7 +37,7 @@ export function generateParenthesis(n) {
       }
 
       // push closing bracket
-      if (closingCount < n && closingCount < openingCount) {
+      if (closingCount < openingCount) {
         permutation.push(")");
         dfs(openingCount, closingCount + 1, permutation);
         permutation.pop();
