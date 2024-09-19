@@ -26,6 +26,16 @@ describe("combination sum 1", () => {
       target: 1,
       expected: [],
     },
+    {
+      name: "3 combinations un sorted",
+      candidates: [3, 2, 5],
+      target: 8,
+      expected: [
+        [2, 2, 2, 2],
+        [2, 3, 3],
+        [3, 5],
+      ],
+    },
   ];
 
   for (const scenerio of scenerios) {
