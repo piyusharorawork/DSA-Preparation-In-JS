@@ -65,9 +65,9 @@ export function maxNumberKswaps(s, k) {
     const permutationStr = permutation.join("");
     if (permutationStr > result) result = permutationStr;
 
+    const max = getMax(start + 1);
     // start +1 as we dont want to waste swap by
     // swapping to itself
-    const max = getMax(start + 1);
     for (let i = start + 1; i < N; i++) {
       if (permutation[start] > max) continue; // no need to swap already max
       if (permutation[i] !== max) continue; // there are other more greater permutations

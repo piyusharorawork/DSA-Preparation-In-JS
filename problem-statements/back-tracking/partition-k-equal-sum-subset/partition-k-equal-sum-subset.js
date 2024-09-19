@@ -42,7 +42,7 @@ export function canPartitionKSubsets(nums, k) {
 
     for (let i = start; i < N; i++) {
       if (used[i]) continue;
-      if (nums[i] > remaining) break;
+      if (nums[i] > remaining) continue;
       used[i] = true;
       if (helper(i, remaining - nums[i], count)) return true;
       used[i] = false;
