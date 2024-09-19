@@ -97,7 +97,7 @@ export function permuteUnique(nums) {
     };
 
     // Base Condition
-    if (start === N) return result.push([...nums]);
+    if (start === N - 1) return result.push([...nums]);
 
     // processed nums
     const processedNums = new Set();

@@ -25,7 +25,7 @@ export function permuteV1(nums) {
   return result;
 }
 
-export function permute(nums) {
+export function permuteV2(nums) {
   const N = nums.length;
   const result = [];
 
@@ -33,6 +33,26 @@ export function permute(nums) {
 
   const backTrack = (start = 0) => {
     if (start === N) return result.push([...nums]);
+    for (let i = start; i < N; i++) {
+      swap(i, start);
+      backTrack(start + 1);
+      swap(i, start);
+    }
+  };
+
+  backTrack();
+
+  return result;
+}
+
+export function permute(nums) {
+  const N = nums.length;
+  const result = [];
+
+  const swap = (i, j) => ([nums[i], nums[j]] = [nums[j], nums[i]]);
+
+  const backTrack = (start = 0) => {
+    if (start === N - 1) return result.push([...nums]);
     for (let i = start; i < N; i++) {
       swap(i, start);
       backTrack(start + 1);
