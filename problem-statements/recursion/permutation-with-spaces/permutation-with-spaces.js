@@ -28,7 +28,7 @@ export function permutationWithSpacesV1(s) {
   return result;
 }
 
-export function permutationWithSpaces(s) {
+export function permutationWithSpacesV2(s) {
   const N = s.length;
   const result = [];
 
@@ -46,6 +46,31 @@ export function permutationWithSpaces(s) {
         permutation.push(" ");
         dfs(start + 1, permutation); // we cannot reuse same index
         permutation.pop();
+        permutation.pop();
+      }
+    }
+  };
+
+  dfs();
+  return result;
+}
+
+export function permutationWithSpaces(s) {
+  const N = s.length;
+  const result = [];
+
+  const dfs = (start = 0, permutation = []) => {
+    if (start === N) result.push(permutation.join(""));
+    else {
+      // insert without space
+      permutation.push(s[start]);
+      dfs(start + 1, permutation); // we cannot reuse same index
+      permutation.pop();
+
+      // insert with space
+      if (start < N - 1) {
+        permutation.push(s[start] + " ");
+        dfs(start + 1, permutation); // we cannot reuse same index
         permutation.pop();
       }
     }
