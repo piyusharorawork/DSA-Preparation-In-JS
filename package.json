@@ -8,7 +8,8 @@
     "test": "npx vitest run",
     "test:watch": "npx vitest",
     "generate": "node generators/generate-code.js",
-    "generate-drawing": "node generators/generate-drawing.js"
+    "generate-drawing": "node generators/generate-drawing.js",
+    "gd": "npm run generate-drawing"
   },
   "repository": {
     "type": "git",
