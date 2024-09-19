@@ -14,7 +14,7 @@ export function safePositionV1(n, k) {
   return dfs();
 }
 
-export function safePosition(n, k) {
+export function safePositionV2(n, k) {
   // create persons array from 1 => n
   const persons = new Array(n).fill(0).map((_, index) => index + 1);
 
@@ -35,4 +35,22 @@ export function safePosition(n, k) {
   };
 
   return solve();
+}
+
+export function safePositionV3(n, k) {
+  const solve = (n, k) => {
+    if (n === 1) return 0;
+    const remaining = solve(n - 1, k);
+    return (remaining + k) % n;
+  };
+
+  return solve(n, k) + 1;
+}
+
+export function safePosition(n, k) {
+  // if there are only 1 person , he will be alive
+  if (n === 1) return 1;
+  const aliveBefore = safePosition(n - 1, k);
+  const result = (aliveBefore + k - 1) % n;
+  return result + 1; // index 1 based
 }

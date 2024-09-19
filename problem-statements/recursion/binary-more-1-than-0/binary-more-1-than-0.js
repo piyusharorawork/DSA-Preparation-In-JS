@@ -22,6 +22,28 @@ export function binaryMore1Than0V1(n) {
   return result;
 }
 
+export function binaryMore1Than0V2(n) {
+  const result = [];
+  const dfs = (zeroCount = 0, oneCount = 0, permutation = []) => {
+    if (zeroCount + oneCount === n) result.push(permutation.join(""));
+    else {
+      if (oneCount < n) {
+        permutation.push("1");
+        dfs(zeroCount, oneCount + 1, permutation);
+        permutation.pop();
+      }
+
+      if (zeroCount < oneCount) {
+        permutation.push("0");
+        dfs(zeroCount + 1, oneCount, permutation);
+        permutation.pop();
+      }
+    }
+  };
+  dfs();
+  return result;
+}
+
 export function binaryMore1Than0(n) {
   const result = [];
   const dfs = (zeroCount = 0, oneCount = 0, permutation = []) => {
