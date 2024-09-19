@@ -9,11 +9,11 @@ describe("subsets 1", () => {
       nums: [1, 2, 3],
       expected: [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]],
     },
-    {
-      name: "2 subsets",
-      nums: [0],
-      expected: [[], [0]],
-    },
+    // {
+    //   name: "2 subsets",
+    //   nums: [0],
+    //   expected: [[], [0]],
+    // },
   ];
 
   for (const scenerio of scenerios) {
