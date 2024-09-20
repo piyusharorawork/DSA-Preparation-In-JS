@@ -9,30 +9,30 @@ describe("subset sum", () => {
       target: 8,
       expected: true,
     },
-    // {
-    //   name: "exists",
-    //   nums: [1, 5, 3, 9],
-    //   target: 15,
-    //   expected: true,
-    // },
-    // {
-    //   name: "not exists",
-    //   nums: [1, 5, 3, 9],
-    //   target: 16,
-    //   expected: false,
-    // },
-    // {
-    //   name: "exists",
-    //   nums: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    //   target: 16,
-    //   expected: true,
-    // },
-    // {
-    //   name: "exists",
-    //   nums: [23, 13, 11, 7, 6, 5, 5],
-    //   target: 35,
-    //   expected: true,
-    // },
+    {
+      name: "exists",
+      nums: [1, 5, 3, 9],
+      target: 15,
+      expected: true,
+    },
+    {
+      name: "not exists",
+      nums: [1, 5, 3, 9],
+      target: 16,
+      expected: false,
+    },
+    {
+      name: "exists",
+      nums: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      target: 16,
+      expected: true,
+    },
+    {
+      name: "exists",
+      nums: [23, 13, 11, 7, 6, 5, 5],
+      target: 35,
+      expected: true,
+    },
   ];
 
   for (const scenerio of scenerios) {

@@ -161,27 +161,40 @@ export function subsetSumV7(nums, target) {
   return dfs();
 }
 
+export function subsetSumV8(nums, target) {
+  const N = nums.length;
+
+  const isExist = (n, runningRemaining) => {
+    if (runningRemaining === 0) return true;
+    if (n === 0) return false;
+
+    const num = nums[n - 1];
+
+    const canBePicked = num <= runningRemaining;
+    if (!canBePicked) return isExist(n - 1, runningRemaining);
+
+    const pickedExist = isExist(n - 1, runningRemaining - num);
+    const notPickedExist = isExist(n - 1, runningRemaining);
+    return pickedExist || notPickedExist;
+  };
+
+  return isExist(N, target);
+}
+
 export function subsetSum(nums, target) {
   const N = nums.length;
 
   const table = Array.from({ length: N + 1 }, () => new Array(target + 1));
-
   for (let n = 0; n < table.length; n++) {
-    for (let currentSum = 0; currentSum < table[0].length; currentSum++) {
-      if (currentSum === 0) table[n][currentSum] = true;
-      else if (n === 0) table[n][currentSum] = false;
+    for (let remaining = 0; remaining < table[0].length; remaining++) {
+      if (remaining === 0) table[n][remaining] = true;
+      else if (n === 0) table[n][remaining] = false;
       else {
         const num = nums[n - 1];
-        // subarray may be included
-        if (num <= currentSum) {
-          table[n][currentSum] =
-            table[n - 1][currentSum - num] || table[n - 1][currentSum];
-        }
-
-        // dont include the subarray
-        else {
-          table[n][currentSum] = table[n - 1][currentSum];
-        }
+        const canBePicked = num <= remaining;
+        table[n][remaining] = canBePicked
+          ? table[n - 1][remaining - num] || table[n - 1][remaining]
+          : table[n - 1][remaining];
       }
     }
   }
