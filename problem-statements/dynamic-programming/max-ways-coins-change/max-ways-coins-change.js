@@ -44,7 +44,7 @@ export function changeV2(amount, coins) {
 }
 
 // DP
-export function change(amount, coins) {
+export function changeV3(amount, coins) {
   const N = coins.length;
 
   const table = Array.from({ length: N + 1 }, () => new Array(amount + 1));
@@ -63,4 +63,24 @@ export function change(amount, coins) {
   }
 
   return table[N][amount];
+}
+
+export function change(amount, coins) {
+  const N = coins.length;
+
+  const countWays = (n, remaining) => {
+    if (remaining === 0) return 1;
+    if (n === 0) return 0;
+    const coin = coins[n - 1];
+    const canbePicked = coin <= remaining;
+
+    if (!canbePicked) return countWays(n - 1, remaining);
+
+    const pickedCount = countWays(n, remaining - coin);
+    const notPickedCount = countWays(n - 1, remaining);
+
+    return pickedCount + notPickedCount;
+  };
+
+  return countWays(N, amount);
 }

@@ -163,18 +163,23 @@ export function coinChangeV6(coins, amount) {
 export function coinChange(coins, amount) {
   const N = coins.length;
 
-  const dfs = (n = N, remaining = amount) => {
+  const minCoins = (n, remaining) => {
     if (remaining === 0) return 0;
     if (n === 0) return Infinity;
 
-    const value = coins[n - 1];
-    if (value <= remaining) {
-      return Math.min(1 + dfs(n, remaining - value), dfs(n - 1, remaining));
-    }
-    return dfs(n - 1, remaining);
+    const coin = coins[n - 1];
+    const canbePicked = coin <= remaining;
+
+    if (!canbePicked) return minCoins(n - 1, remaining);
+
+    const pickedCoins = 1 + minCoins(n, remaining - coin);
+    const notPickedCoins = minCoins(n - 1, remaining);
+
+    const min = Math.min(pickedCoins, notPickedCoins);
+    return min;
   };
 
-  const minCoins = dfs();
+  const result = minCoins(N, amount);
 
-  return minCoins === Infinity ? -1 : minCoins;
+  return result === Infinity ? -1 : result;
 }
