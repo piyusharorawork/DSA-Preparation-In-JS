@@ -103,22 +103,16 @@ export function countSubsetV4(nums, target) {
 export function countSubset(nums, target) {
   const N = nums.length;
 
-  const helper = (n = N, remaining = target) => {
-    if (remaining === 0) {
-      return 1;
-    }
-
-    if (n === 0 || remaining < 0) {
-      return 0;
-    }
-
+  const count = (n, remaining) => {
+    if (remaining === 0) return 1;
+    if (n === 0) return 0;
     const num = nums[n - 1];
-    if (num > target) {
-      return helper(n - 1, remaining);
-    } else {
-      return helper(n - 1, remaining - num) + helper(n - 1, remaining);
-    }
+    const canBePicked = num <= remaining;
+    if (!canBePicked) return count(n - 1, remaining);
+    const pickedCount = count(n - 1, remaining - num);
+    const notPickedCount = count(n - 1, remaining);
+    return pickedCount + notPickedCount;
   };
 
-  return helper();
+  return count(N, target);
 }

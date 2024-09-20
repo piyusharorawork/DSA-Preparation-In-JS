@@ -113,7 +113,7 @@ export function minSubsetSumDifferenceV4(nums) {
   return minDiff;
 }
 
-export function minSubsetSumDifferenceV5(nums) {
+export function minSubsetSumDifference(nums) {
   const N = nums.length;
   const totalSum = nums.reduce((acc, cur) => acc + cur, 0);
 
@@ -152,7 +152,7 @@ export function minSubsetSumDifferenceV5(nums) {
   return minDiff;
 }
 
-export function minSubsetSumDifference(nums) {
+export function minSubsetSumDifferenceV6(nums) {
   const N = nums.length;
   const totalSum = nums.reduce((acc, cur) => acc + cur, 0);
   const table = Array.from({ length: N + 1 }, () => new Array(totalSum + 1));
