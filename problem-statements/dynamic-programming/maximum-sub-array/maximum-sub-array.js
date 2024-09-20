@@ -12,7 +12,7 @@ export function maxSubArrayV1(nums) {
   return result;
 }
 
-export function maxSubArray(nums) {
+export function maxSubArrayV2(nums) {
   const N = nums.length;
   let result = nums[0];
 
@@ -21,5 +21,36 @@ export function maxSubArray(nums) {
     result = Math.max(result, nums[i]);
   }
 
+  return result;
+}
+
+// Using recursion
+export function maxSubArrayV3(nums) {
+  const N = nums.length;
+  let result = -Infinity;
+
+  const dfs = (n = N, runningSum = -Infinity) => {
+    if (n === 0) return;
+    const num = nums[n - 1];
+    runningSum = Math.max(num + runningSum, num);
+    result = Math.max(result, runningSum);
+    dfs(n - 1, runningSum);
+  };
+
+  dfs();
+  return result;
+}
+
+// Using iteration
+export function maxSubArray(nums) {
+  const N = nums.length;
+  let result = -Infinity;
+  let runningSum = -Infinity;
+
+  for (let n = N; n > 0; n--) {
+    const num = nums[n - 1];
+    runningSum = Math.max(num + runningSum, num);
+    result = Math.max(result, runningSum);
+  }
   return result;
 }

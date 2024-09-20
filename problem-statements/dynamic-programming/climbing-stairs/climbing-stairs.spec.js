@@ -13,6 +13,11 @@ describe("climbing stairs", () => {
       n: 3,
       expected: 3,
     },
+    {
+      name: "4 steps",
+      n: 4,
+      expected: 5,
+    },
   ];
 
   for (const scenerio of scenerios) {
