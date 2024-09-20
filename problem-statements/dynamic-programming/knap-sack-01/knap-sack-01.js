@@ -103,7 +103,7 @@ export function maxProfitV3(itemCount, itemWeights, itemPrices, bagCapcity) {
   return table[itemCount][bagCapcity];
 }
 
-export function maxProfit(itemCount, weights, prices, capacity) {
+export function maxProfitV4(itemCount, weights, prices, capacity) {
   const table = new Array(itemCount + 1);
   for (let i = 0; i < table.length; i++) {
     table[i] = new Array(capacity + 1);
@@ -146,4 +146,61 @@ export function maxProfit(itemCount, weights, prices, capacity) {
   }
 
   return table[itemCount][capacity];
+}
+
+// Using pre processing
+export function maxProfitV5(itemCount, weights, prices, capacity) {
+  const items = new Array(itemCount).fill(0).map((_, index) => {
+    return {
+      weight: weights[index],
+      price: prices[index],
+    };
+  });
+
+  const dfs = (n = itemCount, remainingCapacity = capacity) => {
+    if (n === 0 || remainingCapacity === 0) return 0;
+    const item = items[n - 1];
+
+    if (item.weight > remainingCapacity) {
+      return dfs(n - 1, remainingCapacity);
+    }
+
+    const pickedProfit =
+      item.price + dfs(n - 1, remainingCapacity - item.weight);
+    const notPickedProfit = dfs(n - 1, remainingCapacity);
+    return Math.max(pickedProfit, notPickedProfit);
+  };
+
+  return dfs();
+}
+
+export function maxProfit(itemCount, weights, prices, capacity) {
+  // pre processing
+  const items = new Array(itemCount).fill(0).map((_, index) => ({
+    weight: weights[index],
+    price: prices[index],
+  }));
+
+  const calculateMaxProfit = (n, remainingCapacity) => {
+    // there are no items in the bag , so no profit
+    if (n === 0) return 0;
+
+    // bag cant fill any weight
+    if (remainingCapacity === 0) return 0;
+
+    const item = items[n - 1];
+
+    // if the current item is heavier than our bag can handle
+    if (item.weight > remainingCapacity)
+      return calculateMaxProfit(n - 1, remainingCapacity);
+
+    // now item can be picked
+    const pickedProfit =
+      item.price + calculateMaxProfit(n - 1, remainingCapacity - item.weight);
+    const notPickedProfit = calculateMaxProfit(n - 1, remainingCapacity);
+
+    return Math.max(pickedProfit, notPickedProfit);
+  };
+
+  return calculateMaxProfit(itemCount, capacity);
 }
