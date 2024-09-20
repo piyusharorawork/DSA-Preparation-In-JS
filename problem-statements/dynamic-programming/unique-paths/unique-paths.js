@@ -39,7 +39,7 @@ export function uniquePathsV2(m, n) {
 }
 
 // DP
-export function uniquePaths(m, n) {
+export function uniquePathV3(m, n) {
   const table = Array.from({ length: m }, () => new Array(n).fill(0));
 
   for (let r = 0; r < table.length; r++) {
@@ -54,4 +54,15 @@ export function uniquePaths(m, n) {
   }
 
   return table[m - 1][n - 1];
+}
+
+export function uniquePaths(m, n) {
+  const pathCount = (m, n) => {
+    if (m === 0 && n === 0) return 1;
+    if (m < 0 || n < 0) return 0;
+
+    return pathCount(m - 1, n) + pathCount(m, n - 1);
+  };
+
+  return pathCount(m - 1, n - 1);
 }
