@@ -18,6 +18,11 @@ describe("longest palindromic-substring", () => {
       s: "aacabdkacaa",
       expected: "aca",
     },
+    {
+      name: "4",
+      s: "ccc",
+      expected: "ccc",
+    },
   ];
 
   for (const scenerio of scenerios) {

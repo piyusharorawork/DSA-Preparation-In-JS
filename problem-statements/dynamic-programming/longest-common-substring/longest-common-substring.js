@@ -46,7 +46,7 @@ export function longestCommonSubstringV2(text1, text2) {
 }
 
 // DP CLeaner
-export function longestCommonSubstring(text1, text2) {
+export function longestCommonSubstringV3(text1, text2) {
   const M = text1.length;
   const N = text2.length;
 
@@ -63,4 +63,25 @@ export function longestCommonSubstring(text1, text2) {
   }
 
   return longest;
+}
+
+export function longestCommonSubstring(text1, text2) {
+  const M = text1.length;
+  const N = text2.length;
+
+  const table = Array.from({ length: M + 1 }, () => new Array(N + 1));
+
+  let result = 0;
+
+  for (let m = 0; m < table.length; m++) {
+    for (let n = 0; n < table[0].length; n++) {
+      if (m === 0 || n === 0) table[m][n] = 0;
+      else {
+        const isSame = text1[m - 1] === text2[n - 1];
+        table[m][n] = isSame ? 1 + table[m - 1][n - 1] : 0;
+        result = Math.max(result, table[m][n]);
+      }
+    }
+  }
+  return result;
 }

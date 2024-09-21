@@ -42,7 +42,7 @@ export function longestCommonSubsequenceV2(text1, text2) {
 }
 
 // With DP
-export function longestCommonSubsequence(text1, text2) {
+export function longestCommonSubsequenceV3(text1, text2) {
   const M = text1.length;
   const N = text2.length;
 
@@ -60,5 +60,25 @@ export function longestCommonSubsequence(text1, text2) {
     }
   }
 
+  return table[M][N];
+}
+
+export function longestCommonSubsequence(text1, text2) {
+  const M = text1.length;
+  const N = text2.length;
+
+  const table = Array.from({ length: M + 1 }, () => new Array(N + 1));
+
+  for (let m = 0; m < table.length; m++) {
+    for (let n = 0; n < table[0].length; n++) {
+      if (m === 0 || n === 0) table[m][n] = 0;
+      else {
+        const isSame = text1[m - 1] === text2[n - 1];
+        table[m][n] = isSame
+          ? 1 + table[m - 1][n - 1]
+          : Math.max(table[m - 1][n], table[m][n - 1]);
+      }
+    }
+  }
   return table[M][N];
 }

@@ -90,7 +90,7 @@ export function longestPalindromeV3(s) {
 }
 
 //using helper
-export function longestPalindrome(s) {
+export function longestPalindromeV4(s) {
   const M = s.length;
 
   let maxStr = "";
@@ -112,4 +112,32 @@ export function longestPalindrome(s) {
   }
 
   return maxStr;
+}
+
+// More optimised
+export function longestPalindrome(s) {
+  const M = s.length;
+  let start = 0;
+  let maxLength = 0;
+
+  const helper = (left, right) => {
+    while (left >= 0 && right < M && s[left] === s[right]) {
+      left--;
+      right++;
+    }
+
+    // After the while loop, left and right are one step beyond the palindrome
+    const length = right - left - 1;
+    if (length > maxLength) {
+      maxLength = length;
+      start = left + 1; // Update the start of the longest palindrome
+    }
+  };
+
+  for (let i = 0; i < M; i++) {
+    helper(i, i); // Odd-length palindrome
+    helper(i, i + 1); // Even-length palindrome
+  }
+
+  return s.substring(start, start + maxLength);
 }
