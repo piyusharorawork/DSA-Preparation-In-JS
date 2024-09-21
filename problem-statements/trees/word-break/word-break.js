@@ -180,8 +180,8 @@ export function wordBreakV4(s, words) {
 
   return helper();
 }
-
-export function wordBreak(s, words) {
+// With DP
+export function wordBreakV5(s, words) {
   const trei = new Trie();
   for (const word of words) {
     trei.insert(word);
@@ -202,4 +202,27 @@ export function wordBreak(s, words) {
   }
 
   return table[N];
+}
+
+export function wordBreak(s, words) {
+  const trei = new Trie();
+  for (const word of words) {
+    trei.insert(word);
+  }
+
+  const N = s.length;
+
+  const canBeFormed = (n) => {
+    if (n === 0) return true;
+
+    for (let i = n - 1; i >= 0; i--) {
+      const substr = s.substring(i, n);
+      const isWordFound = trei.search(substr);
+      if (isWordFound && canBeFormed(i)) return true;
+    }
+
+    return false;
+  };
+
+  return canBeFormed(N);
 }
