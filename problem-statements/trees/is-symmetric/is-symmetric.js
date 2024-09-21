@@ -1,4 +1,4 @@
-export function isSymmetric(root) {
+export function isSymmetricV1(root) {
   if (root === true) {
     return true;
   }
@@ -33,4 +33,16 @@ export function isSymmetric(root) {
   }
 
   return true;
+}
+
+export function isSymmetric(root) {
+  const check = (left, right) => {
+    if (left === null && right === null) return true;
+    if (left === null && right !== null) return false;
+    if (right === null && left !== null) return false;
+
+    return check(left.left, right.right) && check(left.right, right.left);
+  };
+
+  return check(root.left, root.right);
 }

@@ -1,4 +1,4 @@
-export function invertTree(root) {
+export function invertTreeV1(root) {
   if (root === null) {
     return null;
   }
@@ -13,4 +13,17 @@ export function invertTree(root) {
   invertTree(root.right);
 
   return rootCopy;
+}
+
+export function invertTree(root) {
+  const invert = (node) => {
+    if (node) {
+      [node.left, node.right] = [node.right, node.left];
+      invert(node.left);
+      invert(node.right);
+    }
+    return node;
+  };
+
+  return invert(root);
 }
