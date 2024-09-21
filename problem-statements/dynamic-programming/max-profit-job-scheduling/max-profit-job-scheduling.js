@@ -205,55 +205,31 @@ export function jobSchedulingV4(startTime, endTime, profit) {
 export function jobScheduling(startTimes, endTimes, profits) {
   const N = startTimes.length;
 
-  // preprocess inputs to jobs
-  const jobs = [];
-  for (let i = 0; i < N; i++) {
-    const job = {
+  const jobs = new Array(N)
+    .fill(0)
+    .map((_, i) => ({
       start: startTimes[i],
       end: endTimes[i],
       profit: profits[i],
-    };
-    jobs.push(job);
-  }
+    }))
+    .sort((a, b) => a.end - b.end);
 
-  // sort the jobs in ascending
-  // based on their end time
-  jobs.sort((a, b) => a.end - b.end);
-
-  // helper method to get the next job
-  // to the left
-  const getLeftJobIndex = (index) => {
-    let start = 0;
-    let end = index - 1;
-
-    while (start <= end) {
-      const mid = Math.floor((start + end) / 2);
-      if (jobs[mid].end > jobs[index].start) end = mid - 1;
-      else {
-        if (jobs[mid + 1] && jobs[mid + 1].end <= jobs[index].start)
-          start = mid + 1;
-        else return mid;
-      }
-    }
-    return -1;
+  const getNextJobIndex = (index) => {
+    const start = jobs[index].start;
+    let i = index - 1;
+    while (i >= 0 && jobs[i].end > start) i--;
+    return i;
   };
 
-  const table = new Array(N + 1);
+  const maxProfit = (n) => {
+    if (n == 0) return 0;
+    const job = jobs[n - 1];
+    const nextJobIndex = getNextJobIndex(n - 1);
 
-  for (let n = 0; n < table.length; n++) {
-    if (n === 0) table[n] = 0;
-    else {
-      const job = jobs[n - 1];
-      const leftJobIndex = getLeftJobIndex(n - 1);
-      const profitIncludingCurrentJob = job.profit + table[leftJobIndex + 1];
-      const profitNotIncludingCurrentJob = table[n - 1];
-      const maxProfit = Math.max(
-        profitIncludingCurrentJob,
-        profitNotIncludingCurrentJob
-      );
-      table[n] = maxProfit;
-    }
-  }
+    const pickedProfit = job.profit + maxProfit(nextJobIndex + 1);
+    const notPickedProfit = maxProfit(n - 1);
+    return Math.max(pickedProfit, notPickedProfit);
+  };
 
-  return table[N];
+  return maxProfit(N);
 }
