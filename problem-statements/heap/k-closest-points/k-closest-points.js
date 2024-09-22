@@ -59,7 +59,7 @@ export function kClosestV1(points, k) {
 }
 
 // Using Priority Queue for entire points
-export function kClosest(points, k) {
+export function kClosestV2(points, k) {
   const N = points.length;
 
   const distance = (point) => {
@@ -97,5 +97,27 @@ export function kClosest(points, k) {
     const point = pq.dequeue().value;
     result[i] = point;
   }
+  return result;
+}
+
+export function kClosest(points, k) {
+  const distance = (point) => Math.pow(point[0], 2) + Math.pow(point[1], 2);
+
+  const N = points.length;
+
+  // max Heap
+  const pq = new PriorityQueue({
+    compare: (a, b) => b.dist - a.dist,
+  });
+
+  for (let i = 0; i < N; i++) {
+    pq.enqueue({ val: points[i], dist: distance(points[i]) });
+
+    if (pq.size() > k) pq.dequeue();
+  }
+
+  const result = [];
+  while (!pq.isEmpty()) result.push(pq.dequeue().val);
+
   return result;
 }
