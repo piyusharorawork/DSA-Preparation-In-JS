@@ -37,7 +37,7 @@ export function floodFillV1(image, sr, sc, color) {
   return image;
 }
 
-export function floodFill(image, sr, sc, color) {
+export function floodFillV2(image, sr, sc, color) {
   const R = image.length;
   const C = image[0].length;
 
@@ -59,6 +59,32 @@ export function floodFill(image, sr, sc, color) {
     fill(r + 1, c);
     fill(r - 1, c);
     fill(r, c + 1);
+    fill(r, c - 1);
+  };
+
+  fill(sr, sc);
+
+  return image;
+}
+
+export function floodFill(image, sr, sc, color) {
+  const R = image.length;
+  const C = image[0].length;
+
+  const fill = (r, c) => {
+    if (
+      r < 0 ||
+      c < 0 ||
+      r === R ||
+      c === C ||
+      image[r][c] === 0 ||
+      image[r][c] === color
+    )
+      return;
+    image[r][c] = color;
+    fill(r + 1, c);
+    fill(r, c + 1);
+    fill(r - 1, c);
     fill(r, c - 1);
   };
 

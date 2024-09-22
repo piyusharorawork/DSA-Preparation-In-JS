@@ -1,4 +1,4 @@
-export function numIslands(grid) {
+export function numIslandsV1(grid) {
   const R = grid.length;
   const C = grid[0].length;
 
@@ -19,6 +19,41 @@ export function numIslands(grid) {
       if (value !== "1") continue;
       dfs(r, c);
       result++;
+    }
+  }
+
+  return result;
+}
+
+export function numIslands(grid) {
+  const R = grid.length;
+  const C = grid[0].length;
+
+  const fill = (r, c) => {
+    if (
+      r < 0 ||
+      c < 0 ||
+      r === R ||
+      c === C ||
+      grid[r][c] === "0" ||
+      grid[r][c] === "#"
+    )
+      return;
+    grid[r][c] = "#";
+    fill(r + 1, c);
+    fill(r, c + 1);
+    fill(r - 1, c);
+    fill(r, c - 1);
+  };
+
+  let result = 0;
+
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (grid[r][c] === "1") {
+        fill(r, c);
+        result++;
+      }
     }
   }
 
