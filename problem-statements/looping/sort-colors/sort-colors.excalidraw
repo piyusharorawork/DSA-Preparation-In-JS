@@ -1,0 +1,248 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "type": "freedraw",
+      "version": 55,
+      "versionNonce": 418691642,
+      "isDeleted": false,
+      "id": "hOmJ7cnIF8w1d8q_1_ohr",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -53.15146446228027,
+      "y": -37.27416706085205,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 7.381858825683594,
+      "height": 0.6476497650146484,
+      "seed": 22912762,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1726703676187,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.4035186767578125,
+          0.396728515625
+        ],
+        [
+          0.9968948364257812,
+          0.396728515625
+        ],
+        [
+          2.149810791015625,
+          0.396728515625
+        ],
+        [
+          4.4182586669921875,
+          0.6476497650146484
+        ],
+        [
+          4.8149871826171875,
+          0.6476497650146484
+        ],
+        [
+          5.6084442138671875,
+          0.6476497650146484
+        ],
+        [
+          6.001777648925781,
+          0.6476497650146484
+        ],
+        [
+          6.198463439941406,
+          0.6476497650146484
+        ],
+        [
+          6.395149230957031,
+          0.6476497650146484
+        ],
+        [
+          6.988525390625,
+          0.6476497650146484
+        ],
+        [
+          7.381858825683594,
+          0.6476497650146484
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "simulatePressure": true,
+      "pressures": []
+    },
+    {
+      "id": "pHMwqBE2IrTyVbJm4W3ae",
+      "type": "text",
+      "x": -360.31121253967285,
+      "y": -181.67690467834473,
+      "width": 227.30393981933594,
+      "height": 35,
+      "angle": 0,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1661070940,
+      "version": 2,
+      "versionNonce": 97216740,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1726964476741,
+      "link": null,
+      "locked": false,
+      "text": "[2, 0, 2, 1, 1, 0]",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 24,
+      "containerId": null,
+      "originalText": "[2, 0, 2, 1, 1, 0]",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "HqyPuJZxRsWIUvpYhSX1e",
+      "type": "arrow",
+      "x": -83.64022254943848,
+      "y": -166.47507667541504,
+      "width": 149.6826171875,
+      "height": 4.6251068115234375,
+      "angle": 0,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1787149276,
+      "version": 27,
+      "versionNonce": 1974859620,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1726964479490,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          149.6826171875,
+          -4.6251068115234375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "tqc95qKE5--VRGi8mn0t6",
+      "type": "text",
+      "x": 111.67246055603027,
+      "y": -194.70997047424316,
+      "width": 227.30393981933594,
+      "height": 35,
+      "angle": 0,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 427959644,
+      "version": 34,
+      "versionNonce": 760144604,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1726964487789,
+      "link": null,
+      "locked": false,
+      "text": "[0, 0, 1, 1, 2, 2]",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 24,
+      "containerId": null,
+      "originalText": "[0, 0, 1, 1, 2, 2]",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "PsV_szCB_ge5qVBFhmdVc",
+      "type": "text",
+      "x": -249.18925070652256,
+      "y": -71.28193667199866,
+      "width": 730.211669921875,
+      "height": 210,
+      "angle": 0,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1817206756,
+      "version": 127,
+      "versionNonce": 1755604828,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1726964552945,
+      "link": null,
+      "locked": false,
+      "text": "Becuase it has only 3 types of elements => 0 , 1, 2\n\n\nFirst pass \n1. Move 0 to left\n2. Move 2 to right",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 199,
+      "containerId": null,
+      "originalText": "Becuase it has only 3 types of elements => 0 , 1, 2\n\n\nFirst pass \n1. Move 0 to left\n2. Move 2 to right",
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#000000"
+  },
+  "files": {}
+}

@@ -8,17 +8,10 @@ export function sortColorsV2(nums) {
   const N = nums.length;
   for (let i = 0; i < N; i++) {
     for (let j = 1; j < N; j++) {
-      const left = nums[j - 1];
-      const right = nums[j];
-
-      if (left > right) {
-        const temp = nums[j - 1];
-        nums[j - 1] = nums[j];
-        nums[j] = temp;
-      }
+      if (nums[j - 1] > nums[j])
+        [nums[j - 1], nums[j]] = [nums[j], nums[j - 1]];
     }
   }
-
   return nums;
 }
 
@@ -26,17 +19,10 @@ export function sortColorsV2(nums) {
 export function sortColorsV3(nums) {
   const N = nums.length;
   for (let i = 0; i < N; i++) {
-    let smallestIdx = i;
     for (let j = i + 1; j < N; j++) {
-      if (nums[j] < nums[smallestIdx]) {
-        smallestIdx = j;
-      }
+      if (nums[j] < nums[i]) [nums[i], nums[j]] = [nums[j], nums[i]];
     }
-    const temp = nums[i];
-    nums[i] = nums[smallestIdx];
-    nums[smallestIdx] = temp;
   }
-
   return nums;
 }
 
@@ -46,15 +32,11 @@ export function sortColorsV4(nums) {
   for (let i = 0; i < N; i++) {
     let j = i + 1;
     while (j >= 0) {
-      if (nums[j] < nums[j - 1]) {
-        const temp = nums[j];
-        nums[j] = nums[j - 1];
-        nums[j - 1] = temp;
-      }
+      if (nums[j] < nums[j - 1])
+        [nums[j], nums[j - 1]] = [nums[j - 1], nums[j]];
       j--;
     }
   }
-
   return nums;
 }
 
