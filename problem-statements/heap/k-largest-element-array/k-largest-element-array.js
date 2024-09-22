@@ -1,3 +1,5 @@
+import { PriorityQueue } from "../../../data-structures/heap/heap";
+
 // Using built in sort
 export function findKthLargestV1(nums, k) {
   const N = nums.length;
@@ -126,7 +128,7 @@ export function findKthLargestV4(nums, k) {
 }
 
 // Using quick select iteration
-export function findKthLargest(nums, k) {
+export function findKthLargestV5(nums, k) {
   const N = nums.length;
   const indexToFind = N - k;
 
@@ -160,4 +162,19 @@ export function findKthLargest(nums, k) {
   };
 
   return quickSelect(0, N - 1);
+}
+
+export function findKthLargest(nums, k) {
+  const N = nums.length;
+
+  const pq = new PriorityQueue({
+    compare: (a, b) => a - b,
+  });
+
+  for (let i = 0; i < N; i++) {
+    pq.enqueue(nums[i]);
+    if (pq.size() > k) pq.dequeue();
+  }
+
+  return pq.front();
 }
