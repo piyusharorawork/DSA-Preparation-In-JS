@@ -14,16 +14,16 @@ describe("merge k-sorted-lists", () => {
       ],
       expected: [1, 1, 2, 3, 4, 4, 5, 6],
     },
-    // {
-    //   name: "empty lists",
-    //   lists: [],
-    //   expected: [],
-    // },
-    // {
-    //   name: "1 list with empty",
-    //   lists: [[]],
-    //   expected: [],
-    // },
+    {
+      name: "empty lists",
+      lists: [],
+      expected: [],
+    },
+    {
+      name: "1 list with empty",
+      lists: [[]],
+      expected: [],
+    },
   ];
 
   for (const scenerio of scenerios) {

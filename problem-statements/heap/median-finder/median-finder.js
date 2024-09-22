@@ -135,7 +135,7 @@ export class MedianFinderV4 {
     this.list = [];
   }
 
-  addNum(num) {
+  ddNum(num) {
     this.list.push(num);
   }
 
@@ -156,7 +156,7 @@ export class MedianFinderV4 {
   }
 }
 
-export class MedianFinder {
+export class MedianFinderV5 {
   constructor() {
     this.maxPQ = new PriorityQueue({ compare: (a, b) => b - a });
     this.minPQ = new PriorityQueue({ compare: (a, b) => a - b });
@@ -184,6 +184,40 @@ export class MedianFinder {
     } else if (this.minPQ.size() > this.maxPQ.size()) {
       this.maxPQ.enqueue(this.minPQ.dequeue());
     }
+  }
+
+  findMedian() {
+    if (this.maxPQ.size() > this.minPQ.size()) return this.maxPQ.front();
+
+    const mid1 = this.maxPQ.front();
+    const mid2 = this.minPQ.front();
+    return (mid1 + mid2) / 2;
+  }
+}
+
+export class MedianFinder {
+  constructor() {
+    this.maxPQ = new PriorityQueue({ compare: (a, b) => b - a });
+    this.minPQ = new PriorityQueue({ compare: (a, b) => a - b });
+  }
+
+  addNum(num) {
+    // Always add to maxPQ first
+    this.maxPQ.enqueue(num);
+
+    // Ensure maxPQ holds smaller half and minPQ holds larger half
+    if (
+      this.maxPQ.size() > 0 &&
+      this.minPQ.size() > 0 &&
+      this.maxPQ.front() > this.minPQ.front()
+    )
+      this.minPQ.enqueue(this.maxPQ.dequeue());
+
+    // Balance the sizes: maxPQ can only have 1 more element than minPQ
+    if (this.maxPQ.size() > this.minPQ.size() + 1)
+      this.minPQ.enqueue(this.maxPQ.dequeue());
+    else if (this.minPQ.size() > this.maxPQ.size())
+      this.maxPQ.enqueue(this.minPQ.dequeue());
   }
 
   findMedian() {

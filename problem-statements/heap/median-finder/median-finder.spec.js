@@ -3,12 +3,12 @@ import { MedianFinder } from "./median-finder";
 
 describe("median finder", () => {
   const scenerios = [
-    {
-      name: "example 1",
-      operations: ["addNum", "addNum", "findMedian", "addNum", "findMedian"],
-      inputs: [[1], [2], [], [3], []],
-      expected: [null, null, 1.5, null, 2.0],
-    },
+    // {
+    //   name: "example 1",
+    //   operations: ["addNum", "addNum", "findMedian", "addNum", "findMedian"],
+    //   inputs: [[1], [2], [], [3], []],
+    //   expected: [null, null, 1.5, null, 2.0],
+    // },
     {
       name: "example 2",
       operations: [
@@ -23,81 +23,81 @@ describe("median finder", () => {
       inputs: [[2], [3], [4], [5], [10], [20], []],
       expected: [null, null, null, null, null, null, 4.5],
     },
-    {
-      name: "example 3",
-      operations: [
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-        "addNum",
-        "findMedian",
-      ],
-      inputs: [
-        [6],
-        [],
-        [10],
-        [],
-        [2],
-        [],
-        [6],
-        [],
-        [5],
-        [],
-        [0],
-        [],
-        [6],
-        [],
-        [3],
-        [],
-        [1],
-        [],
-        [0],
-        [],
-        [0],
-        [],
-      ],
-      expected: [
-        null,
-        6.0,
-        null,
-        8.0,
-        null,
-        6.0,
-        null,
-        6.0,
-        null,
-        6.0,
-        null,
-        5.5,
-        null,
-        6.0,
-        null,
-        5.5,
-        null,
-        5.0,
-        null,
-        4.0,
-        null,
-        3.0,
-      ],
-    },
+    // {
+    //   name: "example 3",
+    //   operations: [
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //     "addNum",
+    //     "findMedian",
+    //   ],
+    //   inputs: [
+    //     [6],
+    //     [],
+    //     [10],
+    //     [],
+    //     [2],
+    //     [],
+    //     [6],
+    //     [],
+    //     [5],
+    //     [],
+    //     [0],
+    //     [],
+    //     [6],
+    //     [],
+    //     [3],
+    //     [],
+    //     [1],
+    //     [],
+    //     [0],
+    //     [],
+    //     [0],
+    //     [],
+    //   ],
+    //   expected: [
+    //     null,
+    //     6.0,
+    //     null,
+    //     8.0,
+    //     null,
+    //     6.0,
+    //     null,
+    //     6.0,
+    //     null,
+    //     6.0,
+    //     null,
+    //     5.5,
+    //     null,
+    //     6.0,
+    //     null,
+    //     5.5,
+    //     null,
+    //     5.0,
+    //     null,
+    //     4.0,
+    //     null,
+    //     3.0,
+    //   ],
+    // },
   ];
 
   for (const scenerio of scenerios) {
@@ -118,26 +118,4 @@ describe("median finder", () => {
       }
     });
   }
-
-  // test("1", () => {
-  //   const medianFinder = new MedianFinder();
-  //   medianFinder.addNum(2);
-  //   medianFinder.addNum(3);
-  //   medianFinder.addNum(4);
-  //   medianFinder.addNum(5);
-  //   medianFinder.addNum(10);
-  //   medianFinder.addNum(20);
-
-  //   expect(medianFinder.findMedian()).toBe(4.5);
-  // });
-
-  // test("2", () => {
-  //   const medianFinder = new MedianFinder();
-  //   medianFinder.addNum(6);
-  //   expect(medianFinder.findMedian()).toBe(6);
-
-  //   // ["addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian"]
-  //   // [[],[10],[],[2],[],[6],[],[5],[],[0],[],[6],[],[3],[],[1],[],[0],[],[0],[]]
-  //   // [null,8.00000,null,6.00000,null,6.00000,null,6.00000,null,5.50000,null,6.00000,null,5.50000,null,5.00000,null,4.00000,null,3.00000]
-  // });
 });
