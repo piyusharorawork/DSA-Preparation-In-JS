@@ -1,4 +1,4 @@
-export function isPalindrome(s) {
+export function isPalindromeV1(s) {
   const isAlphaNumeric = (ch) => {
     const code = ch.charCodeAt(0);
 
@@ -47,6 +47,35 @@ export function isPalindrome(s) {
 
     left++;
     right--;
+  }
+
+  return true;
+}
+
+export function isPalindrome(s) {
+  const isAlphaNumeric = (ch) => {
+    return (
+      (ch.charCodeAt(0) >= "0".charCodeAt(0) &&
+        ch.charCodeAt(ch) <= "9".charCodeAt(0)) ||
+      (ch.charCodeAt(0) >= "A".charCodeAt(0) &&
+        ch.charCodeAt(ch) <= "Z".charCodeAt(0)) ||
+      (ch.charCodeAt(0) >= "a".charCodeAt(0) &&
+        ch.charCodeAt(ch) <= "z".charCodeAt(0))
+    );
+  };
+
+  const N = s.length;
+  let left = 0;
+  let right = N - 1;
+
+  while (left < right) {
+    if (!isAlphaNumeric(s[left])) left++;
+    else if (!isAlphaNumeric(s[right])) right--;
+    else if (s[left].toLowerCase() !== s[right].toLowerCase()) return false;
+    else {
+      left++;
+      right--;
+    }
   }
 
   return true;
