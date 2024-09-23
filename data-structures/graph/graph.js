@@ -42,19 +42,20 @@ export class UnionFind {
   find(value) {
     // if parent does not have the value
     // make itself its parent
-    if (!this.parentMap[value]) {
-      this.parentMap[value] = value;
-      return value;
+    let parent = this.parentMap[value];
+    if (!parent) {
+      parent = value;
+      return parent;
     }
 
     // if parent has the value and it is itself
     // just return
-    if (this.parentMap[value] === value) return value;
+    if (parent === value) return parent;
 
     // if the parent is not same as value
     // find the parent and compress the path
-    this.parentMap[value] = this.find(this.parentMap[value]);
-    return this.parentMap[value];
+    parent = this.find(parent);
+    return parent;
   }
 
   union(valueA, valueB) {
