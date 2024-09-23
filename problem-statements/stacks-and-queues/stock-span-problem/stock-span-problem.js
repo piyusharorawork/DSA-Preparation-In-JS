@@ -22,19 +22,16 @@ export function stockSpanV1(nums) {
 
 export function stockSpan(prices) {
   const N = prices.length;
-
-  const result = new Array(N);
   const stack = new Stack();
+  const result = new Array(N);
 
+  // NGL
   for (let i = 0; i < N; i++) {
-    // balance the stack
-    // we need to pick highest first
-    const price = prices[i];
-    while (!stack.isEmpty() && price >= prices[stack.peek()]) stack.pop();
+    // evict smaller
+    while (!stack.isEmpty() && prices[stack.peek()] <= prices[i]) stack.pop();
 
-    const stockSpan = stack.isEmpty() ? i + 1 : i - stack.peek();
-    result[i] = stockSpan;
-
+    // when stack is empty it means all the prices before that are alreay low
+    result[i] = stack.isEmpty() ? i + 1 : i - stack.peek();
     stack.push(i);
   }
 

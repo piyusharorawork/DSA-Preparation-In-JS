@@ -101,11 +101,13 @@ export function maximalRectangle(matrix) {
   const heights = new Array(C).fill(0);
   for (let r = 0; r < R; r++) {
     for (let c = 0; c < C; c++) {
-      heights[c] = matrix[r][c] === "1" ? heights[c] + 1 : 0;
+      heights[c] = matrix[r][c] === "1" ? heights[c] + 1 : 0; // reset
+      if (c === C - 1) {
+        // We have processed the row
+        const area = getMaxArea(heights);
+        maxArea = Math.max(area, maxArea);
+      }
     }
-    // We have processed the row
-    const area = getMaxArea(heights);
-    maxArea = Math.max(area, maxArea);
   }
 
   return maxArea;
