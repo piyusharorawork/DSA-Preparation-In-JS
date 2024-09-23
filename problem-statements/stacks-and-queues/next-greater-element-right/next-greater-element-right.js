@@ -17,7 +17,8 @@ export function nextGreaterElementRightV1(nums) {
   return result;
 }
 
-export function nextGreaterElementRight(nums) {
+// Using stack
+export function nextGreaterElementRightV2(nums) {
   const N = nums.length;
   if (N === 0) return [];
 
@@ -32,6 +33,21 @@ export function nextGreaterElementRight(nums) {
 
     result[i] = stack.isEmpty() ? -1 : stack.peek();
 
+    stack.push(nums[i]);
+  }
+
+  return result;
+}
+
+export function nextGreaterElementRight(nums) {
+  const N = nums.length;
+  const stack = new Stack();
+  const result = new Array(N);
+
+  for (let i = N - 1; i >= 0; i--) {
+    // We need to evict smaller numbers
+    while (!stack.isEmpty() && stack.peek() <= nums[i]) stack.pop();
+    result[i] = stack.isEmpty() ? -1 : stack.peek();
     stack.push(nums[i]);
   }
 
